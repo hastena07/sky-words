@@ -1,0 +1,31 @@
+/* src/components/Main/Main.css */
+
+.Main {
+    width: 100%;
+    background-color: #EAEEF6;
+}
+
+.Main__block {
+    width: 100%;
+    margin: 0 auto;
+    padding: 25px 0 49px;
+}
+
+/*
+ * ЭТОТ КЛАСС ОТВЕЧАЕТ ЗА РАСПОЛОЖЕНИЕ ВСЕХ КОЛОНОК НА ДОСКЕ.
+ * Он нужен именно в этом файле, потому что он описывает сетку всей доски.
+ */
+.Main__column {
+    width: 20%; /* Ширина одной из пяти колонок */
+    margin: 0 auto;
+    display: block;
+}
+.Main__content {
+    width: 100%;
+    display: flex;
+}
+/*
+ * ВАЖНО!
+ * Правило ".cards" НЕ ДОЛЖНО БЫТЬ ЗДЕСЬ.
+ * Оно принадлежит компоненту Column.
+ */

@@ -1,0 +1,100 @@
+/* src/components/PopBrowse/PopBrowse.css */
+
+/* Основной контейнер попапа */
+.PopBrowse {
+    width: 100%;
+    height: 100%;
+    min-width: 320px;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8; /* Зиндекс должен быть самым высоким среди ваших попапов */
+}
+
+/* Полупрозрачный фон */
+.PopBrowse__container {
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Белый блок с контентом */
+.PopBrowse__block {
+    margin: 0 auto;
+    max-width: 630px;
+    width: 100%;
+    padding: 40px 30px 38px;
+    border-radius: 10px;
+    border: 0.7px solid #D4DBE5;
+}
+
+/* Верхняя часть */
+.PopBrowse__content {}
+.PopBrowse__top-block {}
+.PopBrowse__title {}
+
+/* Кнопки управления */
+.PopBrowse__buttons button {
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 0 14px;
+}
+
+/* Скрытый класс */
+._hide { /* Оставляем глобальным */
+    display: none;
+}
+
+/* Отступы для выбора категории */
+.ThemeDown {
+    margin-bottom: 20px;
+}
+
+/* Статус задачи (статичный список) */
+.Status__themes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.Status__theme {
+    border-radius: 24px;
+    border: 0.7px solid rgba(148, 166, 190, 0.4); /* Это цвет границы серого статуса */
+    color: #94A6BE;
+    padding: 11px 14px 10px;
+    margin-right: 7px;
+    margin-bottom: 7px;
+}
+/* Описание задачи */
+.FormBrowse__area,
+.FormBrowse__area::-moz-placeholder,
+.FormBrowse__area::placeholder { /* <--- Объединяем всё здесь */
+    max-width: 370px;
+    width: 100%; 
+    outline: none;
+    padding: 14px;
+    background: #EAEEF6;
+    border: 0.7px solid rgba(148, 166, 190, 0.4);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: -0.14px;
+    margin-top: 14px;
+    height: 200px;
+}
+
+/* Плейсхолдер */
+.FormBrowse__area::-moz-placeholder,
+.FormBrowse__area::placeholder {
+    font-weight: 400; /* Эти свойства относятся ТОЛЬКО к тексту плейсхолдера */
+    font-size: 14px;
+    line-height: 1px;
+    color: #94A6BE;
+    letter-spacing: -0.14px;
+}

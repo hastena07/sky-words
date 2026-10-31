@@ -1,0 +1,138 @@
+/* src/components/PopUser/PopUser.css */
+
+/* Основной контейнер */
+.PopUser {
+  position: relative; /* Важно для позиционирования выпадающего меню */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Имя пользователя теперь выглядит как текст, но является кнопкой */
+.PopUser__name-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.PopUser__name-trigger:hover {
+  color: #33399b;
+}
+
+/* Скрытый email (оставим на случай, если захотите показать его всегда) */
+.PopUser__mail {
+  display: none; /* Скрыт по умолчанию */
+  color: #94A6BE;
+  font-size: 14px;
+  line-height: 21px;
+  margin-bottom: 10px;
+}
+
+/* === ВЫПАДАЮЩЕЕ МЕНЮ === */
+.PopUser__dropdown {
+  position: absolute;
+  top: 100%; /* Под элементом */
+  right: 0; /* Прижимаем к правому краю родителя */
+  margin-top: 8px;
+  background-color: #FFFFFF;
+  border: 0.7px solid #D4DBE5;
+  border-radius: 10px;
+  padding: 16px 20px;
+  width: 220px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+/* Элементы внутри меню */
+.PopUser__dropdown .PopUser__mail {
+  display: block; /* Показываем почту внутри меню */
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.PopUser__theme {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.PopUser__theme input[type="checkbox"] {
+  margin-left: 10px;
+  /* Ваши стили для кастомного чекбокса из глобального CSS */
+  position: relative;
+  width: 24px;
+  height: 13px;
+  border-radius: 100px;
+  background: #EAEEF6;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.PopUser__theme input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #94A6BE;
+  transition: 0.5s;
+}
+
+.PopUser__theme input:checked[type="checkbox"]::before {
+  left: 12px;
+}
+
+/* Кнопки внутри меню */
+.PopUser__action-btn {
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  justify-content: flex-start;
+  height: 30px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Ссылка на регистрацию */
+.PopUser__auth-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #94A6BE;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 0.7px solid #EAEEF6;
+}
+
+.PopUser__link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #565EEF;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(86, 94, 239, 0.5);
+}
+
+.PopUser__link:hover {
+  color: #33399b;
+}

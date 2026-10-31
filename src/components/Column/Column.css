@@ -1,0 +1,40 @@
+/* src/components/Column/Column.css */
+
+.Column__title {
+    padding: 0 10px;
+    margin: 15px 0;
+}
+.Column__title p {
+    color: #94A6BE;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+/* Контейнер для всех карточек внутри этой колонки */
+.Cards {
+    width: 100%;
+    display: block;
+    position: relative;
+}
+
+/* Каждый отдельный элемент-контейнер вокруг Card */
+.Cards__item {
+    padding: 5px;
+    animation-name: column-card-appearance;
+    animation-duration: 500ms;
+    animation-timing-function: linear;
+}
+
+/* Анимация плавного появления */
+@keyframes column-card-appearance {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: auto;
+        opacity: 1;
+    }
+}

@@ -1,0 +1,104 @@
+.Calendar {
+    width: 182px;
+    margin-bottom: 20px;
+}
+
+.Calendar__ttl {
+    margin-bottom: 14px;
+    padding: 0 7px;
+}
+
+.Calendar__p {
+    color: #94A6BE;
+    font-size: 10px;
+    line-height: 1;
+}
+
+.Calendar__nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding: 0 7px;
+}
+
+.Calendar__month {
+    color: #94A6BE;
+    font-size: 14px;
+    line-height: 25px;
+    font-weight: 600;
+}
+
+/* ЭТИ КЛАССЫ НЕ МЕНЯЕМ, ОНИ ИСПОЛЬЗУЮТСЯ ГЛОБАЛЬНО */
+.nav__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav__action {
+    width: 18px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav__action svg {
+    fill: #94A6BE;
+}
+
+.Calendar__days-names {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 7px 0;
+    padding: 0 7px;
+}
+
+.Calendar__day-name {
+    color: #94A6BE;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.2px;
+}
+
+.Calendar__cells {
+    width: 182px;
+    height: 126px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Calendar__cell {
+    width: 22px;
+    height: 22px;
+    margin: 2px;
+    border-radius: 50%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    color: #94A6BE;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: -0.2px;
+    cursor: pointer;
+}
+
+.Calendar__cell._other-month {
+    opacity: 0;
+}
+
+.Calendar__cell._current {
+    font-weight: 700;
+}
+
+.Calendar__cell._active-day {
+    background-color: #94A6BE;
+    color: #FFFFFF;
+}
