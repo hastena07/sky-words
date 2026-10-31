@@ -86,8 +86,8 @@ function App() {
   const closeAuthPage = () => setIsAuthPageOpen(false);
 
   return (
-    <div className="wrapper">
-      <div className="Container">
+    <div className="Wrapper">
+      
         {/* Header теперь сам управляет своими модальными окнами */}
         {userData && (
           <>
@@ -111,12 +111,12 @@ function App() {
         {!userData && isAuthPageOpen && (
           <>
             {isSignIn ? (
-              <SignIn
+              <SignIn className="Header_user"
                 onSwitchToSignUp={() => setIsSignIn(false)}
                 onSubmit={(data) => handleLogin({...data, name: 'Ivan Ivanov'})}
               />
             ) : (
-              <SignUp
+              <SignUp className="Header_user"
                 onSwitchToSignIn={() => setIsSignIn(true)}
                 onSubmit={(data) => handleLogin({...data, name: 'Ivan Ivanov'})}
               />
@@ -144,7 +144,7 @@ function App() {
           }}
         />
       </div>
-    </div>
+    
   );
 }
 

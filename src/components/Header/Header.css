@@ -1,56 +1,67 @@
 /* === ОСНОВНОЙ БЛОК ШАПКИ === */
 .Header {
-    display: flex;
-    align-items: center;
-  width: 100%;
-  background-color: #FFFFFF;
-  box-shadow: 0 1px 0 0 rgba(148, 166, 190, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  
+    width: 100%;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+
 }
 
-.Container-header {
-  max-width: 1260px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 70px;
+.Header__logo img {
+    width: 85px;
 }
+.Container {
+    max-width: 1260px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
 
 /* === ЛОГОТИП === */
 .Header__block {
-  display: flex;
-  align-items: center;
+    height: 70px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0 10px;
+}
+.Header__nav {
+    max-width: 290px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.Header__logo_show_light,
-.Header__logo_dark {
+.Header__logo _show_light,
+.Header__logo _dark {
   display: flex;
   align-items: center;
 }
 
 /* Показываем нужный логотип в зависимости от темы */
-.Header__logo_show_light {
+.Header__logo _show_light {
   display: flex;
 }
-.Header__logo_dark {
+._dark {
   display: none;
 }
 
 /* Если у вас есть класс на body для тёмной темы, например .theme-dark */
-.theme-dark .Header__logo_show_light {
+.Theme-dark .Header__logo _show_light {
   display: none;
 }
-.theme-dark .Header__logo_dark {
+.Theme-dark .Header__logo _dark {
   display: flex;
 }
 
-.Header__logo_show_light img,
-.Header__logo_dark img {
+.Header__logo _show_light img,
+.Header__logo _dark img {
   width: 85px;
   height: 32px;
   margin-right: 8px;
@@ -68,152 +79,72 @@
 }
 
 /* === НАВИГАЦИЯ И КНОПКИ === */
-.Header__nav {
-  display: flex;
- align-items: center;
- 
- 
-  
-  gap: 16px; /* Расстояние между кнопкой и профилем */
-}
+
 
 /* Кнопка "Создать новую задачу" */
-.header__btn-main-new {width: 100%;
- padding: 5px 5px 5px 5px;
-  height: 40px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
-  border: none;
-  cursor: pointer;
-  background-color: #565EEF;
-  color: #FFFFFF;
-  transition: background-color 0.2s ease;
+.Header__btn-main-new {
+ width: 178px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #565EEF;
+    color: #FFFFFF;
+    border: none;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    margin-right: 20px;
 }
 
-.header__btn-main-new:hover {
+.Header__btn-main-new:hover {
   background-color: #33399b;
 }
-
-/* === МОДАЛЬНОЕ ОКНО ВЫХОДА (pop-exit) === */
-
-/* Оверлей */
-.pop-exit {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
+.Header__user {
+    height: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 20px;
+    color: #565EEF;
 }
-
-/* Активное состояние для оверлея */
-.pop-exit--active {
-  display: flex;
+._hover02:hover, .Header__user:hover {
+    color: #33399b;
 }
-
-/* Центральный блок */
-.pop-exit__block {
-  background-color: #FFFFFF;
-  max-width: 370px;
-  width: 100%;
-  padding: 50px 60px;
-  border-radius: 10px;
-  border: 0.7px solid #D4DBE5;
-  box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
-  text-align: center;
+._hover02:hover::after, .Header__user:hover::after {
+    border-left-color: #33399b;
+    border-bottom-color: #33399b;
 }
-
-.pop-exit__ttl h2 {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 30px;
-  letter-spacing: -0.4px;
-  margin-bottom: 20px;
-  color: #000000;
+.Header__user::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    border-left: 1.9px solid #565EEF;
+    border-bottom: 1.9px solid #565EEF;
+    transform: rotate(-45deg);
+    margin: -6px 0 0 5px;
+    padding: 0;
 }
+.Header__pop-user-set {
+    position: absolute;
+    top: 61px;
+    right: 0;
+    width: 213px;
+    height: 205px;
+    border-radius: 10px;
+    border: 0.7px solid rgba(148, 166, 190, 0.4);
+    background: #FFF;
+    /* box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21); */
+    padding: 34px;
+    text-align: center;
+    z-index: 2;
 
-.pop-exit__form-group {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 30px;
 }
-
-.pop-exit__exit-yes {
-  width: 153px;
-  height: 30px;
-  background-color: #565EEF;
-  border-radius: 4px;
-  border: none;
-  color: #FFFFFF;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.pop-exit__exit-yes:hover {
-  background-color: #33399b;
-}
-
-.pop-exit__exit-no {
-  width: 153px;
-  height: 30px;
-  background-color: transparent;
-  border-radius: 4px;
-  border: 0.7px solid #565EEF;
-  color: #565EEF;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.pop-exit__exit-no:hover {
-  background-color: #F1F1F1;
-}
-
-/* === АДАПТИВ === */
-@media screen and (max-width: 768px) {
-  .Container-header {
-    padding: 0 20px;
-  }
-}
-
-@media screen and (max-width: 495px) {
-  .Container-header {
-    padding: 0 16px;
-    height: 60px;
-  }
-
-  .Header__logo_show_light a,
-  .Header__logo_dark a {
-    font-size: 16px;
-  }
-
-  .Header__logo_show_light img,
-  .Header__logo_dark img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .header__btn-main-new {
-    padding: 0 16px;
-    height: 36px;
-    font-size: 13px;
-  }
-
-  .pop-exit__block {
-    padding: 40px 30px;
-  }
-
-  .pop-exit__ttl h2 {
-    font-size: 18px;
-  }
+.Pop-user-set:target, 
+.Pop-exit:target,
+.Pop-new-card:target, 
+.Pop-browse:target {
+    display: block;
 }

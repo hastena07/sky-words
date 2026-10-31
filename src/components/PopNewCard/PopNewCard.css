@@ -3,48 +3,59 @@
 /* Основной контейнер попапа */
 .PopNewCard {
     width: 100%;
+    min-width: 375px;
     height: 100%;
-    min-width: 320px;
     min-height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 7; /* Самый высокий зиндекс среди ваших попапов */
+    z-index: 6;
 }
-
 /* Полупрозрачный фон */
 .PopNewCard__container {
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     padding: 0 16px;
-    background: rgba(0, 0, 0, 0.4);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
 }
 
 /* Белый блок с контентом */
 .PopNewCard__block {
+   display: block;
     margin: 0 auto;
+    background-color: #FFFFFF;
     max-width: 630px;
     width: 100%;
     padding: 40px 30px 48px;
     border-radius: 10px;
     border: 0.7px solid #D4DBE5;
-    box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
+    position: relative;
 }
-
+.PopNewCard__content {
+    display: block;
+    text-align: left;
+}
 /* Заголовок */
-.PopNewCard__title {
+.PopNewCard__ttl {
+    color: #000;
     font-size: 20px;
+    font-weight: 600;
     line-height: 24px;
-    letter-spacing: -0.6px;
     margin-bottom: 20px;
 }
 
 /* Крестик закрытия */
 .PopNewCard__close {
+   position: absolute;
+    top: 20px;
+    right: 30px;
     color: #94A6BE;
+    cursor: pointer;
 }
 
 /* Контейнер содержимого */

@@ -31,12 +31,20 @@ const PopNewCard = ({ onCreate }) => {
   return (
     <div className="PopNewCard">
       <div className="PopNewCard__container">
-        <h2 className="PopNewCard__title">Новая задача</h2>
-        <form onSubmit={handleCreate} className="PopNewCard__form">
+        <div className='PopNewCard__block'> 
+          <div className='PopNewCard__content'>  
+             <h2 className="PopNewCard__ttl">Создание задачи</h2>
+             <a href="#" class="PopNewCard__close">&#10006;</a>
+              <div class="PopNewCard__wrap">
+
+
+
+          <form onSubmit={handleCreate} className="PopNewCard__form form-new" id="formNewCard" action="#">
+         <label for="formTitle" class="subttl">Название задачи</label>
           <input
             type="text"
             className="PopNewCard__input"
-            placeholder="Название задачи"
+            
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             autoFocus
@@ -60,7 +68,14 @@ const PopNewCard = ({ onCreate }) => {
               Создать
             </button>
           </div>
-        </form>
+        </form>  
+              </div>
+          </div>
+          
+        
+        
+          </div>
+        
       </div>
     </div>
   );

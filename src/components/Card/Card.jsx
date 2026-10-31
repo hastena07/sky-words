@@ -10,7 +10,7 @@ import './Card.css'; // Подключаем стили для этого ком
  */
 const Card = ({ title, category, date, onView }) => {
   return (
-    <div className="Card">
+    <div className="Cards__card card">
       {/* Верхняя панель с категорией и меню */}
       <div className="Card__group">
         {/* Блок категории */}

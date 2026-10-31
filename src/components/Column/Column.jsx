@@ -11,10 +11,8 @@ import Card from '../Card/Card'; // Импортируем компонент к
 // src/components/Column/Column.jsx
 const Column = ({ title, cards, onCardView }) => {
   return (
-    <div className="Column">
-       <div className="Column__title">
-         <p>{title}</p>
-        </div> 
+    <div className="Main__column">
+      <div><p className="Column__title">{title}</p></div> 
      
        <div className="Cards">
         {cards.length === 0 ? (

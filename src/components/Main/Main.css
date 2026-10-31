@@ -4,7 +4,12 @@
     width: 100%;
     background-color: #EAEEF6;
 }
-
+.Container {
+    max-width: 1260px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
 .Main__block {
     width: 100%;
     margin: 0 auto;

@@ -11,7 +11,7 @@ const PopExit = ({ onConfirm, onClose }) => {
     <div className="PopExit">
       <div className="PopExit__container">
         <div className="PopExit__block">
-          <h2 className="PopExit__title">Выйти из аккаунта?</h2>
+          <h2 className="PopExit__ttl">Выйти из аккаунта?</h2>
           <form className="PopExit__form" id="formExit" action="#">
             <div className="PopExit__buttons">
               <button

@@ -22,46 +22,48 @@ const Header = ({ userName, userEmail, onLogout, onOpenAuth, onNewCard }) => {
 
   return (
     <>
+
       <header className="Header">
-        <div className='Container-header'> 
-          <div className='Header__block'>
-            <div className="Header__logo_show_light">
+        <div className='Container'> 
+          <div className='Header__block'> 
+            <div className="Header__logo _show_light">
               <a href="/"><img src={Logo} alt="Логотип" /></a>
             </div> 
-            <div className="Header__logo_dark">
+            <div className="Header__logo _dark">
               <a href="/"><img src={Logo} alt="Логотип" /></a>
+            </div>
+          
+            <div className="Header__nav">
+                {/* Кнопка создания задачи */}
+              <button 
+              type="button" 
+              className="Header__btn-main-new _hover01" 
+              id="btnMainNew" 
+              onClick={() => onNewCard(0)}
+              >
+              Создать новую задачу
+              </button>
+
+               {/* Профиль пользователя */}
+               <PopUser
+               userName={userName}
+               userEmail={userEmail}
+              onLogout={openExitPopup} // Теперь открываем локальный попап
+              onOpenAuth={onOpenAuth}
+               />
             </div>
           </div>
         </div>
-      
-        <div className="Header__nav">
-          {/* Кнопка создания задачи */}
-          <button 
-            type="button" 
-            className="_btn-bg _hover01 header__btn-main-new" 
-            id="btnMainNew" 
-            onClick={() => onNewCard(0)}
-          >
-            Создать новую задачу
-          </button>
-
-          {/* Профиль пользователя */}
-          <PopUser
-            userName={userName}
-            userEmail={userEmail}
-            onLogout={openExitPopup} // Теперь открываем локальный попап
-            onOpenAuth={onOpenAuth}
-          />
-        </div>
+        
       </header>
 
       {/* Модальное окно подтверждения выхода */}
       {isExitModalOpen && (
-        <div className="modal-overlay" onClick={closeExitPopup}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <div className="Modal-overlay" onClick={closeExitPopup}>
+          <div className="Modal-content" onClick={e => e.stopPropagation()}>
             <h3>Выйти из аккаунта?</h3>
             <p>Вы уверены, что хотите завершить сеанс?</p>
-            <div className="modal-actions">
+            <div className="Modal-actions">
               <button onClick={handleConfirmExit} className="_btn-bg">Выйти</button>
               <button onClick={closeExitPopup} className="_btn-border">Отмена</button>
             </div>

@@ -24,37 +24,38 @@ const PopUser = ({ userName, userEmail, onLogout, onOpenAuth }) => {
 
   return (
     <div className="PopUser">
-      {/* Кнопка-триггер */}
-      <button
+      
+      <a href="#"
         type="button"
-        className="PopUser__name-trigger"
+        className="Header__user _hover02"
         onClick={toggleMenu}
       >
         {userName}
-      </button>
+      </a>
 
       {/* Выпадающее меню */}
       {isMenuOpen && (
-        <div className="PopUser__dropdown">
-          <p className="PopUser__mail">{userEmail}</p>
+        <div className="Header__pop-user-set Pop-user-set" id="user-set-target">
+          <p className="Pop-user-set__name">{userName}</p>
 
-          <div className="PopUser__theme">
-            <label>
+          <p className="Pop-user-set__mail ">{userEmail}</p>
+
+          <div className="Pop-user-set__theme">
+              <p>Темная тема</p>
               <input type="checkbox" name="checkbox" />
-              <span>Темная тема</span>
-            </label>
+            
           </div>
 
           <button
             type="button"
-            className="_hover03 _btn-bg PopUser__action-btn"
+            className="_hover03"
             id="btnExit"
             onClick={onLogout}
           >
             Выйти
           </button>
 
-          <div className="PopUser__auth-link">
+          {/* <div className="PopUser__auth-link">
             <span>Нет аккаунта?</span>
             <button
               type="button"
@@ -66,7 +67,7 @@ const PopUser = ({ userName, userEmail, onLogout, onOpenAuth }) => {
             >
               Зарегистрироваться
             </button>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

@@ -13,15 +13,17 @@ const Main = ({ onCardView }) => {
         <div className="Main__block">
           <div className="Main__content">
             {/* Колонки со статичными данными (в будущем заменим на данные из API) */}
-             <Column 
-                title="БЕЗ СТАТУСА"
+             
+              <Column 
+                title="бЕЗ СТАТУСА"
                 cards={[
                   { id: '1', title: "Задача 1", category: "_orange", date: "30.10.23" },
                   { id: '2', title: "Задача 2", category: "_green", date: "01.11.23" }
                 ]}
                 onCardView={onCardView}
-              />
-            <div className="Main__column">
+               />
+           
+            
               <Column 
                 title="НУЖНО СДЕЛАТЬ"
                 cards={[
@@ -30,8 +32,8 @@ const Main = ({ onCardView }) => {
                 ]}
                 onCardView={onCardView}
                />
-            </div>
-            <div className="Main__column">
+           
+          
              <Column 
                 title="В РАБОТЕ"
                 cards={[
@@ -40,10 +42,9 @@ const Main = ({ onCardView }) => {
                 ]}
                 onCardView={onCardView}
               />
-            </div>
-              
-            
-              <div className="Main__column">
+           
+                     
+          
              <Column 
                 title="ТЕСТИРОВАНИЕ"
                 cards={[
@@ -52,8 +53,8 @@ const Main = ({ onCardView }) => {
                 ]}
                 onCardView={onCardView}
               />
-            </div>
-              <div className="Main__column">
+          
+           
              <Column 
                 title="ГОТОВО"
                 cards={[
@@ -62,7 +63,7 @@ const Main = ({ onCardView }) => {
                 ]}
                 onCardView={onCardView}
               />
-            </div>
+           
             
           </div>
         </div>

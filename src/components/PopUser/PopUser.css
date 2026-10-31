@@ -9,64 +9,40 @@
 }
 
 /* Имя пользователя теперь выглядит как текст, но является кнопкой */
-.PopUser__name-trigger {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  color: #000000;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 21px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
 
-.PopUser__name-trigger:hover {
-  color: #33399b;
-}
 
 /* Скрытый email (оставим на случай, если захотите показать его всегда) */
-.PopUser__mail {
-  display: none; /* Скрыт по умолчанию */
-  color: #94A6BE;
-  font-size: 14px;
-  line-height: 21px;
-  margin-bottom: 10px;
-}
+
 
 /* === ВЫПАДАЮЩЕЕ МЕНЮ === */
-.PopUser__dropdown {
-  position: absolute;
-  top: 100%; /* Под элементом */
-  right: 0; /* Прижимаем к правому краю родителя */
-  margin-top: 8px;
-  background-color: #FFFFFF;
-  border: 0.7px solid #D4DBE5;
-  border-radius: 10px;
-  padding: 16px 20px;
-  width: 220px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  z-index: 5;
+.Pop-user-set__name {
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.14px;
+    margin-bottom: 4px;
+    margin-top: 0;
+}
+.Pop-user-set__mail {
+    color: #94A6BE;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.14px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.Pop-user-set__theme {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
 
-/* Элементы внутри меню */
-.PopUser__dropdown .PopUser__mail {
-  display: block; /* Показываем почту внутри меню */
-  margin-bottom: 16px;
-  text-align: left;
+.Pop-user-set__theme p{
+  margin: 0;
 }
-
-.PopUser__theme {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  font-size: 14px;
-  line-height: 21px;
-}
-
-.PopUser__theme input[type="checkbox"] {
+.Pop-user-set__theme input[type="checkbox"] {
   margin-left: 10px;
   /* Ваши стили для кастомного чекбокса из глобального CSS */
   position: relative;
@@ -81,7 +57,7 @@
   cursor: pointer;
 }
 
-.PopUser__theme input[type="checkbox"]::before {
+.Pop-user-set__theme input[type="checkbox"]::before {
   content: "";
   position: absolute;
   top: 1px;
@@ -92,8 +68,16 @@
   background-color: #94A6BE;
   transition: 0.5s;
 }
+.Pop-user-set button {
+    width: 72px;
+    height: 30px;
+    background: transparent;
+    color: #565EEF;
+    border-radius: 4px;
+    border: 1px solid #565EEF;
+}
 
-.PopUser__theme input:checked[type="checkbox"]::before {
+.Pop-user-set__theme input:checked[type="checkbox"]::before {
   left: 12px;
 }
 
