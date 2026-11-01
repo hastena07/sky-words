@@ -30,7 +30,6 @@
     font-weight: 600;
 }
 
-/* ЭТИ КЛАССЫ НЕ МЕНЯЕМ, ОНИ ИСПОЛЬЗУЮТСЯ ГЛОБАЛЬНО */
 .nav__actions {
     display: flex;
     align-items: center;

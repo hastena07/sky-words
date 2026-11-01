@@ -1,20 +1,11 @@
-/* src/components/PopUser/PopUser.css */
-
 /* Основной контейнер */
 .PopUser {
-  position: relative; /* Важно для позиционирования выпадающего меню */
+  position: relative; 
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-
-/* Имя пользователя теперь выглядит как текст, но является кнопкой */
-
-
-/* Скрытый email (оставим на случай, если захотите показать его всегда) */
-
-
-/* === ВЫПАДАЮЩЕЕ МЕНЮ === */
+/*ВЫПАДАЮЩЕЕ МЕНЮ */
 .Pop-user-set__name {
     color: #000;
     font-size: 14px;
@@ -44,7 +35,7 @@
 }
 .Pop-user-set__theme input[type="checkbox"] {
   margin-left: 10px;
-  /* Ваши стили для кастомного чекбокса из глобального CSS */
+  /* cтили для  чекбокса */
   position: relative;
   width: 24px;
   height: 13px;
@@ -94,7 +85,7 @@
 }
 
 /* Ссылка на регистрацию */
-.PopUser__auth-link {
+/* .PopUser__auth-link { 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -119,4 +110,4 @@
 
 .PopUser__link:hover {
   color: #33399b;
-}
+}*/

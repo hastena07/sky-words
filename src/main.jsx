@@ -5,9 +5,9 @@ import './App.css'; // Глобальные стили
 import App from './App.jsx';
 
 // Находим контейнер для приложения 
-const Container = document.getElementById('root');
- if (!Container) throw new Error('Missing #root element.'); // Создаем корневой компонент React 
-  const root = createRoot(Container); // <-- Передаем найденный DOM-элемент! // Рендерим приложение 
+const container = document.getElementById('root');
+ if (!container) throw new Error('Missing #root element.'); // Создаем корневой компонент React 
+  const root = createRoot(container); // <-- Передаем найденный DOM-элемент! // Рендерим приложение 
   
   root.render( <StrictMode>
      <App /> 

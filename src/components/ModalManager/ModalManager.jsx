@@ -1,5 +1,3 @@
-// src/components/ModalManager/ModalManager.jsx
-
 import './ModalManager.css';
 import PopExit from '../PopExit/PopExit';
 import PopNewCard from '../PopNewCard/PopNewCard';
@@ -12,8 +10,7 @@ const ModalManager = ({
   onConfirmExit,
   currentCard /* Данные текущей карты */
 }) => {
-  if (!isOpen) return null; // Если ничего не открыто, рендерим пустоту
-
+  if (!isOpen) return null; 
   const backdropStyle = { 
     position: 'fixed',
     top: 0,

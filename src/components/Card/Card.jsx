@@ -1,13 +1,6 @@
-import './Card.css'; // Подключаем стили для этого компонента
+import './Card.css'; 
 
-/**
- * Компонент Карточки задачи.
- *
- * @param {string} title - Название задачи
- * @param {string} category - Категория (Web Design, Research...)
- * @param {string} date - Срок исполнения (например: '30.10.23')
- * @param {function} onView - Обработчик клика по меню карточки (просмотр/редактирование)
- */
+
 const Card = ({ title, category, date, onView }) => {
   return (
     <div className="Cards__card card">

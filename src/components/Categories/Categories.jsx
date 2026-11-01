@@ -1,4 +1,4 @@
-import './Categories.css'; // Подключаем стили
+import './Categories.css'; 
 
 /**
  * Компонент "Выбор категории".
@@ -9,7 +9,6 @@ import './Categories.css'; // Подключаем стили
  */
 const Categories = ({ activeCategory, categories, onSelect }) => {
   /**
-   * Генерирует JSX-элемент для одной категории.
    * 
    * @param {{ name: string, colorClass: string }} category Объект категории
    * @returns Элемент <div>
