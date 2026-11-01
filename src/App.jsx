@@ -5,26 +5,12 @@ import Header from './components/Header/Header';
 import Logo from './components/assets/logo.png';
 import Main from './components/Main/Main';
 import ModalManager from './components/ModalManager/ModalManager';
-import SignIn from './components/SignIn/SignIn';
-import SignUp from './components/SignUp/SignUp';
+
+// SignIn и SignUp полностью удалены
 
 function App() {
-  /* === СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ === */
-  const [userData, setUserData] = useState(() => {
-    return JSON.parse(localStorage.getItem('kanban-user')) || null;
-  });
-
-  const handleLogin = (data) => {
-    localStorage.setItem('kanban-user', JSON.stringify(data));
-    setUserData(data);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('kanban-user');
-    setUserData(null);
-  };
-
-  /* === ДАННЫЕ ЗАДАЧ === */
+   const [isLoading, setIsLoading] = useState(true);
+  // ДАННЫЕ ЗАДАЧ
   const [tasks, setTasks] = useState(() => {
     return JSON.parse(localStorage.getItem('kanban-tasks')) || [
       { title: "Без статуса", cards: [] },
@@ -34,6 +20,8 @@ function App() {
       { title: "Готово", cards: [] }
     ];
   });
+
+  
 
   useEffect(() => {
     localStorage.setItem('kanban-tasks', JSON.stringify(tasks));
@@ -49,12 +37,12 @@ function App() {
     const updatedColumns = [...tasks];
     const fromIdx = updatedColumns[fromCol].cards.findIndex(card => card.id === cardId);
     if (fromIdx === -1) return;
-    const movingCard = updatedColumns[fromCol].cards.splice(fromIdx, 1)[0];
+    const [movingCard] = updatedColumns[fromCol].cards.splice(fromIdx, 1);
     updatedColumns[toCol].cards.push(movingCard);
     setTasks(updatedColumns);
   };
 
-  /* === МОДАЛЬНЫЕ ОКНА (только для задач) === */
+  //  (только для задач)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [currentCard, setCurrentCard] = useState(null);
@@ -78,73 +66,47 @@ function App() {
     setCurrentCard(null);
   };
 
-  /* === АВТОРИЗАЦИЯ === */
-  const [isAuthPageOpen, setIsAuthPageOpen] = useState(!userData);
-  const [isSignIn, setIsSignIn] = useState(true);
-
-  const openAuthPage = () => setIsAuthPageOpen(true);
-  const closeAuthPage = () => setIsAuthPageOpen(false);
+  // АВТОРИЗАЦИЯ — ПОЛНОСТЬЮ УДАЛЕНА
 
   return (
     <div className="Wrapper">
-      
-        {/* Header теперь сам управляет своими модальными окнами */}
-        {userData && (
-          <>
-            <Header
-              userName={userData.name}
-              userEmail={userData.email}
-              onLogout={handleLogout} // Передаём функцию выхода напрямую
-              onOpenAuth={openAuthPage}
-              onNewCard={openNewCardPopup} // Передаём функцию создания задачи
-            />
+      {/* 
+        Теперь приложение всегда рендерит Header и Main.
+        Никакой проверки пользователя не требуется.
+      */}
+      <Header
+        // Поскольку пользователя нет, передаём заглушки
+        userName="Ivan Ivanov" 
+        userEmail="Ivan.Ivanov@mail.com"
+       
+        onNewCard={openNewCardPopup}
+      />
 
-            {/* Main и модалки для задач остаются в App */}
-            <Main 
-              tasks={tasks}
-              onMoveCard={moveCardBetweenColumns}
-              onCardView={openBrowsePopup}
-            />
-          </>
-        )}
+      <Main 
+        tasks={tasks}
+        onMoveCard={moveCardBetweenColumns}
+        onCardView={openBrowsePopup}
+      />
 
-        {!userData && isAuthPageOpen && (
-          <>
-            {isSignIn ? (
-              <SignIn className="Header_user"
-                onSwitchToSignUp={() => setIsSignIn(false)}
-                onSubmit={(data) => handleLogin({...data, name: 'Ivan Ivanov'})}
-              />
-            ) : (
-              <SignUp className="Header_user"
-                onSwitchToSignIn={() => setIsSignIn(true)}
-                onSubmit={(data) => handleLogin({...data, name: 'Ivan Ivanov'})}
-              />
-            )}
-          </>
-        )}
-
-        {/* ModalManager теперь отвечает только за карточки задач */}
-        <ModalManager
-          isOpen={isModalOpen}
-          modalType={modalType}
-          currentCard={currentCard}
-          onClose={closeModal}
-          onCreate={(title, category, date) => {
-            const newCard = {
-              id: Date.now(),
-              title,
-              description: '',
-              category,
-              date,
-              status: ''
-            };
-            addTaskToColumn(currentColumnForNewCard, newCard);
-            closeModal();
-          }}
-        />
-      </div>
-    
+      <ModalManager
+        isOpen={isModalOpen}
+        modalType={modalType}
+        currentCard={currentCard}
+        onClose={closeModal}
+        onCreate={(title, category, date) => {
+          const newCard = {
+            id: Date.now(),
+            title,
+            description: '',
+            category,
+            date,
+            status: ''
+          };
+          addTaskToColumn(currentColumnForNewCard, newCard);
+          closeModal();
+        }}
+      />
+    </div>
   );
 }
 

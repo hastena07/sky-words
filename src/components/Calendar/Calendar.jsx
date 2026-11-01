@@ -1,6 +1,6 @@
 // src/components/Calendar/Calendar.jsx
 
-import './Calendar.css'; // Подключаем локальные стили
+import './Calendar.css'; 
 
 /**
  * Компонент Календарь.

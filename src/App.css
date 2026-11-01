@@ -37,26 +37,53 @@ a {
     background-color: #F1F1F1;
 }
 
+.loading-overlay { position: fixed;
+     top: 0;
+      left: 0;
+       width: 100%;
+        height: 100%;
+         background-color: #f5f7fa; 
+         display: flex; 
+         flex-direction: column; 
+         justify-content: center;
+          align-items: center; 
+          z-index: 1000; color:
+           #5f7187;
+            font-size: 18px;
+             font-weight: 500;
+             }
+              .loading-spinner { 
+                width: 50px;
+                 height: 50px; 
+                 border: 4px solid #e1e6ed;
+                  border-top: 4px solid #3178ef;
+                   border-radius: 50%; 
+                   animation: spin 1s linear infinite;
+                    margin-bottom: 20px;
+                 }
+                  @keyframes spin { 0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }}
+
 @media screen and (max-width: 1200px) {
-    .main__block {
+    .Main__block {
         width: 100%;
         margin: 0 auto;
         padding: 40px 0 64px;
     }
-    .main__content {
+    .Main__content {
         display: block;
     }
-    .main__column {
+    .Main__column {
         width: 100%;
         margin: 0 auto;
         display: block;
     }
-    .cards {
+    .Cards {
         width: 100%;
         display: flex;
         overflow-y: auto;
     }
-    .cards__card {
+    .Cards__card {
         width: 220px;
         height: 130px;
         background-color: #FFFFFF;
@@ -69,34 +96,36 @@ a {
     }
 }
 @media screen and (max-width: 660px) {
-    .pop-new-card {
+    .Pop-new-card {
         top: 70px;
     }
-    .pop-new-card__container {
+    .Pop-new-card__container {
         padding: 0;
         justify-content: flex-start;
     }
-    .pop-new-card__block {
+    .Pop-new-card__block {
         border-radius: 0;
     }
-    .pop-new-card__wrap {
+    .Pop-new-card__wrap {
         display: block;
     }
-    .calendar {
+    .Calendar {
         max-width: 340px;
         width: 100%;
     }
-    .calendar__ttl, .calendar__nav, .calendar__period {
+    .Calendar__ttl, 
+    .Calendar__nav, 
+    .Calendar__period {
         padding: 0;
     }
-    .calendar .date-create {
+    .Calendar .date-create {
         display: none;
         margin-bottom: 7px;
     }
-    .calendar__p {
+    .Calendar__p {
         font-size: 14px;
     }
-    .calendar__day-name {
+    .Calendar__day-name {
         font-size: 14px;
     }
     .Calendar__cells {
@@ -111,26 +140,26 @@ a {
         height: 42px;
         font-size: 14px;
     }
-    .pop-browse {
+    .Pop-browse {
         top: 70px;
     }
-    .pop-browse__container {
+    .Pop-browse__container {
         padding: 0;
         justify-content: flex-start;
     }
-    .pop-browse__block {
+    .Pop-browse__block {
         border-radius: 0;
     }
-    .pop-browse__wrap {
+    .Pop-browse__wrap {
         display: block;
     }
 }
 @media screen and (max-width: 495px) {
-    .container {
+    .Container {
         width: 100%;
         padding: 0 16px;
     }
-    .header__btn-main-new {
+    .Header__btn-main-new {
         z-index: 3;
         position: fixed;
         left: 16px;
@@ -141,77 +170,80 @@ a {
         border-radius: 4px;
         margin-right: 0;
     }
-    .pop-new-card__container {
+    .Pop-new-card__container {
         padding: 0;
         justify-content: flex-start;
     }
-    .pop-new-card__block {
+    .Pop-new-card__block {
         padding: 20px 16px 32px;
     }
-    .pop-new-card__form {
+    .Pop-new-card__form {
         max-width: 100%;
         width: 100%;
         display: block;
     }
-    .pop-new-card__calendar {
+    .Pop-new-card__calendar {
         width: 100%;
     }
-    .form-new__area {
+    .Form-new__area {
         max-width: 100%;
         height: 34px;
     }
-    .form-new__create {
+    .Form-new__create {
         width: 100%;
         height: 40px;
     }
-    .pop-browse__block {
+    .Pop-browse__block {
         padding: 20px 16px 32px;
     }
-    .pop-browse__content .theme-down {
+    .Pop-browse__content .theme-down {
         display: block;
         margin-bottom: 20px;
     }
-    .pop-browse__content .theme-top {
+    .Pop-browse__content .theme-top {
         display: none;
     }
-    .pop-browse__form {
+    .Pop-browse__form {
         max-width: 100%;
     }
-    .pop-browse__calendar {
+    .Pop-browse__calendar {
         width: 100%;
     }
-    .pop-browse__btn-browse button, .pop-browse__btn-edit button {
+    .Pop-browse__btn-browse button, 
+    .Pop-browse__btn-edit button {
         width: 100%;
         height: 40px;
     }
-    .pop-browse__btn-browse .btn-group, .pop-browse__btn-edit .btn-group {
+    .Pop-browse__btn-browse .btn-group,
+     .Pop-browse__btn-edit .btn-group {
         width: 100%;
     }
-    .pop-browse__btn-browse .btn-group button, .pop-browse__btn-edit .btn-group button {
+    .Pop-browse__btn-browse .btn-group button, 
+    .Pop-browse__btn-edit .btn-group button {
         margin-right: 0px;
     }
-    .form-browse__area {
+    .Form-browse__area {
         max-width: 100%;
     }
-    .form-browse__area {
+    .Form-browse__area {
         height: 37px;
     }
 }
 @media only screen and (max-width: 375px) {
-    .pop-exit__block {
+    .Pop-exit__block {
         padding: 50px 20px;
     }
-    .pop-exit__exit-yes {
+    .Pop-exit__exit-yes {
         width: 100%;
         height: 40px;
         margin-right: 0;
         margin-bottom: 10px;
     }
-    .pop-exit__exit-no {
+    .Pop-exit__exit-no {
         width: 100%;
         height: 40px;
     }
-    .pop-exit__form-group {
+    .Pop-exit__form-group {
         display: block;
     }
 }
