@@ -36,3 +36,4 @@ export const initialCards = [
     status: 'Нужно сделать'
   }
 ];
+export default cardData;
