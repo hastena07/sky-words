@@ -1,4 +1,3 @@
-// data.js
 export const initialCards = [
   {
     id: 1,
@@ -36,4 +35,3 @@ export const initialCards = [
     status: 'Нужно сделать'
   }
 ];
-export default cardData;
