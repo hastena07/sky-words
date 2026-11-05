@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import './PopUser.css';
 
-const PopUser = ({ userName, userEmail, onLogout, onOpenAuth }) => {
+const PopUser = ({ userName, userEmail, onUserClick, onOpenAuth }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -45,7 +45,7 @@ const PopUser = ({ userName, userEmail, onLogout, onOpenAuth }) => {
             type="button"
             className="_hover03"
             id="btnExit"
-            onClick={onLogout}
+            onClick={onUserClick}
           >
             Выйти
           </button>

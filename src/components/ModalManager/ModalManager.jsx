@@ -33,17 +33,17 @@ const ModalManager = ({
         <PopNewCard 
           onCreate={(title, category, date) => {
             console.log('Создана задача:', title);
-            onClose(); // Закрываем после создания
+            onClose();
           }}
           onCancel={onClose}
         />
       );
       break;
 
-    case 'browse': // Просмотр / редактирование
+    case 'browse':
       content = (
         <PopBrowse 
-          {...currentCard} // Передаем сюда title, description, category, date
+          {...currentCard} 
           onEdit={() => console.log('Редактируем задачу')}
           onDelete={() => console.log('Удаляем задачу')}
           onClose={onClose}

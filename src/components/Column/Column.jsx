@@ -16,7 +16,7 @@ const Column = ({ title, cards, onCardView }) => {
             <div key={cardData.id} className="Cards__item">
               <Card
                 title={cardData.title}
-                category={cardData.topic}        
+                category={cardData.topic}
                 date={cardData.date}
                 onView={() => onCardView(cardData)}
               />

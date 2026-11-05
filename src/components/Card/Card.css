@@ -40,11 +40,12 @@
     border-radius: 18px;
 }
 .card__theme p {
+    
     font-size: 10px;
     font-weight: 600;
     line-height: 10px;
 }
-._orange {margin: -4px;
+._orange {
     background-color: #FFE4C2;
     color: #FF6D00;
 }

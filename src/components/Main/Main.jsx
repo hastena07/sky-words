@@ -1,8 +1,7 @@
-// src/components/Main/Main.jsx
 import './Main.css';
 import Column from '../Column/Column';
 
-const Main = ({ tasks, onCardView }) => {
+const Main = ({ tasks, onMoveCard, onCardView }) => {
   return (
     <main className="Main">
       <div className="Container">

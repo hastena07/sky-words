@@ -1,11 +1,7 @@
 import './PopNewCard.css';
 import Categories from '../Categories/Categories';
 
-/**
- * Модальное окно создания новой карточки.
- *
- * @param {function} onCreate - Обработчик создания задачи (закрывает окно и сохраняет данные)
- */
+
 const PopNewCard = ({ onCreate }) => {
   const [title, setTitle] = React.useState('');
   const [category, setCategory] = React.useState('_orange');
@@ -18,15 +14,16 @@ const PopNewCard = ({ onCreate }) => {
       return;
     }
     console.log('Данные новой задачи:', { title, category, date });
-    onCreate(); // Передаем управление родителю (закрытие модалки)
+    onCreate(); 
   };
 
-  // Список категорий для компонента Categories
+  
   const categoriesList = [
     { name: 'Web Design', colorClass: '_orange' },
     { name: 'Research', colorClass: '_green' },
     { name: 'Meeting', colorClass: '_purple' },
   ];
+  
 
   return (
     <div className="PopNewCard">
@@ -34,13 +31,13 @@ const PopNewCard = ({ onCreate }) => {
         <div className='PopNewCard__block'> 
           <div className='PopNewCard__content'>  
              <h2 className="PopNewCard__ttl">Создание задачи</h2>
-             <a href="#" class="PopNewCard__close">&#10006;</a>
-              <div class="PopNewCard__wrap">
+             <a href="#" className="PopNewCard__close">&#10006;</a>
+              <div className="PopNewCard__wrap">
 
 
 
           <form onSubmit={handleCreate} className="PopNewCard__form form-new" id="formNewCard" action="#">
-         <label for="formTitle" class="subttl">Название задачи</label>
+         <label for="formTitle" className="subttl">Название задачи</label>
           <input
             type="text"
             className="PopNewCard__input"
