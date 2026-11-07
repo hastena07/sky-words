@@ -18,7 +18,7 @@ export const initialCards = [
   {
     id: 3,
     topic: 'Development',
-    title: 'Настроить сборку проекта',
+    title: ' Стилизовать интерфейс с помощью Styled Components',
     date: '05.11.23',
     status: 'Тестирование',
   },
@@ -31,9 +31,10 @@ export const initialCards = [
   },
   {
     id: 5,
-    topic: 'Marketing',
+    topic: 'Copywriting',
     title: 'Написать текст для рассылки',
     date: '03.11.23',
     status: 'Нужно сделать',
   },
 ];
+

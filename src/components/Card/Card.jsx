@@ -1,4 +1,17 @@
 import './Card.css'; 
+import React from 'react';
+
+
+const TOPICS = {
+  'Web Design': '_orange',
+  'Research': '_green',
+  'Copywriting': '_purple',
+};
+
+const getThemeClass = (topic) => TOPICS[topic] || '_gray';
+
+
+
 
 
 const Card = ({ title, category, date, onView }) => {
@@ -7,9 +20,9 @@ const Card = ({ title, category, date, onView }) => {
       {/* Верхняя панель с категорией и меню */}
       <div className="Card__group">
         
-        <div className="Card__theme _green">
-         <p className="_green">{category}</p>
-          </div>
+        <div className={`Card__theme ${getThemeClass(category)}`}>
+  <p>{category}</p>
+</div>
         {/* Меню действий над карточкой (три точки) */}
         <button
           type="button"
