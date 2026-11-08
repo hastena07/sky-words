@@ -1,30 +1,31 @@
-import './Column.css';
 import Card from '../Card/Card';
+import { CardItem } from '../Card/Card.styled';
+import { ColumnBlock, ColumnTitle, CardsWrap, Empty } from './Column.styled';
 
 const Column = ({ title, cards, onCardView }) => {
   return (
-    <div className="Main__column">
+    <ColumnBlock>
       <div>
-        <p className="Column__title">{title}</p>
+        <ColumnTitle>{title}</ColumnTitle>
       </div>
 
-      <div className="Cards">
+      <CardsWrap>
         {cards.length === 0 ? (
-          <div className="Column__empty">Нет задач</div>
+          <Empty>Нет задач</Empty>
         ) : (
           cards.map((cardData) => (
-            <div key={cardData.id} className="Cards__item">
+            <CardItem key={cardData.id}>
               <Card
                 title={cardData.title}
                 category={cardData.topic}
                 date={cardData.date}
                 onView={() => onCardView(cardData)}
               />
-            </div>
+            </CardItem>
           ))
         )}
-      </div>
-    </div>
+      </CardsWrap>
+    </ColumnBlock>
   );
 };
 

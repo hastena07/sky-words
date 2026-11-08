@@ -1,60 +1,54 @@
 // src/components/PopUser/PopUser.jsx
-import { useState } from 'react';
-import './PopUser.css';
+import { useState, useRef, useEffect } from 'react';
+import {
+  Wrapper, HeaderUser, PopUserSet, SetName, SetMail, ThemeToggle, BtnExit,
+  Checkbox,
+} from './PopUser.styled';
 
 const PopUser = ({ userName, userEmail, onUserClick, onOpenAuth }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const rootRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   // Закрываем меню, если кликнули мимо
-  const handleClickOutside = (event) => {
-    if (event.target.closest('.PopUser') === null) {
-      setIsMenuOpen(false);
-    }
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (rootRef.current && !rootRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
- 
   return (
-    <div className="PopUser">
-      
-      <a href="#"
-        type="button"
-        className="Header__user _hover02"
-        onClick={toggleMenu}
-      >
+    <Wrapper ref={rootRef}>
+      <HeaderUser as="a" href="#" onClick={toggleMenu}>
         {userName}
-      </a>
+      </HeaderUser>
 
       {/* Выпадающее меню */}
       {isMenuOpen && (
-        <div className="Header__pop-user-set Pop-user-set" id="user-set-target">
-          <p className="Pop-user-set__name">{userName}</p>
+        <PopUserSet>
+          <SetName>{userName}</SetName>
+          <SetMail>{userEmail}</SetMail>
 
-          <p className="Pop-user-set__mail ">{userEmail}</p>
+          <ThemeToggle>
+            <p>Темная тема</p>
+            <Checkbox type="checkbox" name="checkbox" />
+          </ThemeToggle>
 
-          <div className="Pop-user-set__theme">
-              <p>Темная тема</p>
-              <input type="checkbox" name="checkbox" />
-            
-          </div>
-
-          <button
-            type="button"
-            className="_hover03"
-            id="btnExit"
-            onClick={onUserClick}
-          >
+          <BtnExit type="button" id="btnExit" onClick={onUserClick}>
             Выйти
-          </button>
+          </BtnExit>
 
-          {/* <div className="PopUser__auth-link">
+          {/* <div>
             <span>Нет аккаунта?</span>
             <button
               type="button"
-              className="PopUser__link _hover04 PopUser__action-btn"
               onClick={() => {
                 onOpenAuth('signup');
                 setIsMenuOpen(false); // Закрываем меню после клика
@@ -63,9 +57,9 @@ const PopUser = ({ userName, userEmail, onUserClick, onOpenAuth }) => {
               Зарегистрироваться
             </button>
           </div> */}
-        </div>
+        </PopUserSet>
       )}
-    </div>
+    </Wrapper>
   );
 };
 

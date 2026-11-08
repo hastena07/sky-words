@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import './App.css';
+import { Wrapper, LoadingState, LoadingMessage } from './App.styled';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ModalManager from './components/ModalManager/ModalManager';
-import { initialCards } from './data';
+import { initialCards } from './data'; 
 
 const COLUMNS = [
   'Без статуса',
@@ -30,7 +30,6 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
- 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [currentCard, setCurrentCard] = useState(null);
@@ -54,7 +53,6 @@ function App() {
     setCurrentCard(null);
   };
 
-  // ---- Задачи ----
   const addTaskToColumn = (columnIndex, newCard) => {
     setTasks((prevTasks) =>
       prevTasks.map((column, index) =>
@@ -96,18 +94,18 @@ function App() {
 
   if (isLoading) {
     return (
-      <div className="Wrapper loading-state">
-        <div className="loading-message">Данные загружаются</div>
-      </div>
+      <LoadingState>
+        <LoadingMessage>Данные загружаются</LoadingMessage>
+      </LoadingState>
     );
   }
 
   return (
-    <div className="Wrapper">
+    <Wrapper>
       <Header
-      userName="Ivan Ivanov"
-      userEmail="Ivan.Ivanov@mail.com"
-      onLogout={() => console.log('Выход из аккаунта')} 
+        userName="Ivan Ivanov"
+        userEmail="Ivan.Ivanov@mail.com"
+        onLogout={() => console.log('Выход из аккаунта')}
       />
 
       <Main
@@ -123,7 +121,7 @@ function App() {
         onClose={closeModal}
         onCreate={createCard}
       />
-    </div>
+    </Wrapper>
   );
 }
 
