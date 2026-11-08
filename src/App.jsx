@@ -1,60 +1,36 @@
-// src/App.jsx
 import { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import Logo from './components/assets/logo.png';
 import Main from './components/Main/Main';
 import ModalManager from './components/ModalManager/ModalManager';
-import SignIn from './components/SignIn/SignIn';
-import SignUp from './components/SignUp/SignUp';
+import { initialCards } from './data';
+
+const COLUMNS = [
+  'Без статуса',
+  'Нужно сделать',
+  'В работе',
+  'Тестирование',
+  'Готово',
+];
 
 function App() {
-  /* === СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ === */
-  const [userData, setUserData] = useState(() => {
-    return JSON.parse(localStorage.getItem('kanban-user')) || null;
-  });
+  const [isLoading, setLoading] = useState(true);
 
-  const handleLogin = (data) => {
-    localStorage.setItem('kanban-user', JSON.stringify(data));
-    setUserData(data);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('kanban-user');
-    setUserData(null);
-  };
-
-  /* === ДАННЫЕ ЗАДАЧ === */
-  const [tasks, setTasks] = useState(() => {
-    return JSON.parse(localStorage.getItem('kanban-tasks')) || [
-      { title: "Без статуса", cards: [] },
-      { title: "Нужно сделать", cards: [] },
-      { title: "В работе", cards: [] },
-      { title: "Тестирование", cards: [] },
-      { title: "Готово", cards: [] }
-    ];
-  });
+  const [tasks, setTasks] = useState(
+    COLUMNS.map((title) => ({
+      title,
+      cards: initialCards.filter((card) => card.status === title),
+    }))
+  );
 
   useEffect(() => {
-    localStorage.setItem('kanban-tasks', JSON.stringify(tasks));
-  }, [tasks]);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const addTaskToColumn = (columnIndex, newCard) => {
-    const updatedColumns = [...tasks];
-    updatedColumns[columnIndex].cards.push(newCard);
-    setTasks(updatedColumns);
-  };
-
-  const moveCardBetweenColumns = (fromCol, toCol, cardId) => {
-    const updatedColumns = [...tasks];
-    const fromIdx = updatedColumns[fromCol].cards.findIndex(card => card.id === cardId);
-    if (fromIdx === -1) return;
-    const movingCard = updatedColumns[fromCol].cards.splice(fromIdx, 1)[0];
-    updatedColumns[toCol].cards.push(movingCard);
-    setTasks(updatedColumns);
-  };
-
-  /* === МОДАЛЬНЫЕ ОКНА (только для задач) === */
+ 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [currentCard, setCurrentCard] = useState(null);
@@ -62,14 +38,14 @@ function App() {
 
   const openNewCardPopup = (columnIndex) => {
     setCurrentColumnForNewCard(columnIndex);
-    setIsModalOpen(true);
     setModalType('new-card');
+    setIsModalOpen(true);
   };
 
   const openBrowsePopup = (cardData) => {
     setCurrentCard(cardData);
-    setIsModalOpen(true);
     setModalType('browse');
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
@@ -78,73 +54,76 @@ function App() {
     setCurrentCard(null);
   };
 
-  /* === АВТОРИЗАЦИЯ === */
-  const [isAuthPageOpen, setIsAuthPageOpen] = useState(!userData);
-  const [isSignIn, setIsSignIn] = useState(true);
+  // ---- Задачи ----
+  const addTaskToColumn = (columnIndex, newCard) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((column, index) =>
+        index === columnIndex
+          ? { ...column, cards: [...column.cards, newCard] }
+          : column
+      )
+    );
+  };
 
-  const openAuthPage = () => setIsAuthPageOpen(true);
-  const closeAuthPage = () => setIsAuthPageOpen(false);
+  const createCard = (title, topic, date) => {
+    const newCard = {
+      id: `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+      topic,
+      title,
+      description: '',
+      date,
+      status: tasks[currentColumnForNewCard].title,
+    };
+    addTaskToColumn(currentColumnForNewCard, newCard);
+    closeModal();
+  };
+
+  const moveCardBetweenColumns = (fromCol, toCol, cardId) => {
+    setTasks((prevTasks) => {
+      const updatedColumns = prevTasks.map((column) => ({
+        ...column,
+        cards: [...column.cards],
+      }));
+      const fromIdx = updatedColumns[fromCol].cards.findIndex(
+        (card) => card.id === cardId
+      );
+      if (fromIdx === -1 || fromCol === toCol) return prevTasks;
+      const [movingCard] = updatedColumns[fromCol].cards.splice(fromIdx, 1);
+      updatedColumns[toCol].cards.push(movingCard);
+      return updatedColumns;
+    });
+  };
+
+  if (isLoading) {
+    return (
+      <div className="Wrapper loading-state">
+        <div className="loading-message">Данные загружаются</div>
+      </div>
+    );
+  }
 
   return (
     <div className="Wrapper">
-      
-        {/* Header теперь сам управляет своими модальными окнами */}
-        {userData && (
-          <>
-            <Header
-              userName={userData.name}
-              userEmail={userData.email}
-              onLogout={handleLogout} // Передаём функцию выхода напрямую
-              onOpenAuth={openAuthPage}
-              onNewCard={openNewCardPopup} // Передаём функцию создания задачи
-            />
+      <Header
+      userName="Ivan Ivanov"
+      userEmail="Ivan.Ivanov@mail.com"
+      onLogout={() => console.log('Выход из аккаунта')} 
+      />
 
-            {/* Main и модалки для задач остаются в App */}
-            <Main 
-              tasks={tasks}
-              onMoveCard={moveCardBetweenColumns}
-              onCardView={openBrowsePopup}
-            />
-          </>
-        )}
+      <Main
+        tasks={tasks}
+        onMoveCard={moveCardBetweenColumns}
+        onCardView={openBrowsePopup}
+      />
 
-        {!userData && isAuthPageOpen && (
-          <>
-            {isSignIn ? (
-              <SignIn className="Header_user"
-                onSwitchToSignUp={() => setIsSignIn(false)}
-                onSubmit={(data) => handleLogin({...data, name: 'Ivan Ivanov'})}
-              />
-            ) : (
-              <SignUp className="Header_user"
-                onSwitchToSignIn={() => setIsSignIn(true)}
-                onSubmit={(data) => handleLogin({...data, name: 'Ivan Ivanov'})}
-              />
-            )}
-          </>
-        )}
-
-        {/* ModalManager теперь отвечает только за карточки задач */}
-        <ModalManager
-          isOpen={isModalOpen}
-          modalType={modalType}
-          currentCard={currentCard}
-          onClose={closeModal}
-          onCreate={(title, category, date) => {
-            const newCard = {
-              id: Date.now(),
-              title,
-              description: '',
-              category,
-              date,
-              status: ''
-            };
-            addTaskToColumn(currentColumnForNewCard, newCard);
-            closeModal();
-          }}
-        />
-      </div>
-    
+      <ModalManager
+        isOpen={isModalOpen}
+        modalType={modalType}
+        currentCard={currentCard}
+        onClose={closeModal}
+        onCreate={createCard}
+      />
+    </div>
   );
 }
 

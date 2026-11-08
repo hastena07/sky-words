@@ -1,5 +1,3 @@
-// src/components/ModalManager/ModalManager.jsx
-
 import './ModalManager.css';
 import PopExit from '../PopExit/PopExit';
 import PopNewCard from '../PopNewCard/PopNewCard';
@@ -12,8 +10,7 @@ const ModalManager = ({
   onConfirmExit,
   currentCard /* Данные текущей карты */
 }) => {
-  if (!isOpen) return null; // Если ничего не открыто, рендерим пустоту
-
+  if (!isOpen) return null; 
   const backdropStyle = { 
     position: 'fixed',
     top: 0,
@@ -36,17 +33,17 @@ const ModalManager = ({
         <PopNewCard 
           onCreate={(title, category, date) => {
             console.log('Создана задача:', title);
-            onClose(); // Закрываем после создания
+            onClose();
           }}
           onCancel={onClose}
         />
       );
       break;
 
-    case 'browse': // Просмотр / редактирование
+    case 'browse':
       content = (
         <PopBrowse 
-          {...currentCard} // Передаем сюда title, description, category, date
+          {...currentCard} 
           onEdit={() => console.log('Редактируем задачу')}
           onDelete={() => console.log('Удаляем задачу')}
           onClose={onClose}

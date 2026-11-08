@@ -1,6 +1,3 @@
-/* src/components/PopBrowse/PopBrowse.css */
-
-/* Основной контейнер попапа */
 .PopBrowse {
     width: 100%;
     height: 100%;
@@ -9,7 +6,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 8; /* Зиндекс должен быть самым высоким среди ваших попапов */
+    z-index: 8; 
 }
 
 /* Полупрозрачный фон */
@@ -33,10 +30,7 @@
     border: 0.7px solid #D4DBE5;
 }
 
-/* Верхняя часть */
-.PopBrowse__content {}
-.PopBrowse__top-block {}
-.PopBrowse__title {}
+
 
 /* Кнопки управления */
 .PopBrowse__buttons button {
@@ -55,7 +49,7 @@
     margin-bottom: 20px;
 }
 
-/* Статус задачи (статичный список) */
+/* Статус задачи */
 .Status__themes {
     display: flex;
     flex-wrap: wrap;
@@ -65,7 +59,7 @@
 
 .Status__theme {
     border-radius: 24px;
-    border: 0.7px solid rgba(148, 166, 190, 0.4); /* Это цвет границы серого статуса */
+    border: 0.7px solid rgba(148, 166, 190, 0.4); 
     color: #94A6BE;
     padding: 11px 14px 10px;
     margin-right: 7px;
@@ -74,7 +68,7 @@
 /* Описание задачи */
 .FormBrowse__area,
 .FormBrowse__area::-moz-placeholder,
-.FormBrowse__area::placeholder { /* <--- Объединяем всё здесь */
+.FormBrowse__area::placeholder {
     max-width: 370px;
     width: 100%; 
     outline: none;
@@ -92,7 +86,7 @@
 /* Плейсхолдер */
 .FormBrowse__area::-moz-placeholder,
 .FormBrowse__area::placeholder {
-    font-weight: 400; /* Эти свойства относятся ТОЛЬКО к тексту плейсхолдера */
+    font-weight: 400; 
     font-size: 14px;
     line-height: 1px;
     color: #94A6BE;

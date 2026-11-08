@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import './PopUser.css';
 
-const PopUser = ({ userName, userEmail, onLogout, onOpenAuth }) => {
+const PopUser = ({ userName, userEmail, onUserClick, onOpenAuth }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -16,12 +16,7 @@ const PopUser = ({ userName, userEmail, onLogout, onOpenAuth }) => {
     }
   };
 
-  // Добавляем обработчик на документ, когда меню открыто
-  // Это стандартный паттерн для выпадающих списков
-  // В упрощенной версии можно пока без этого, но с ним надежнее
-  // React 18+ требует useEffect для таких подписок
-  // Пока сделаем простую версию без useEffect, а клик по имени будет просто переключать состояние
-
+ 
   return (
     <div className="PopUser">
       
@@ -50,7 +45,7 @@ const PopUser = ({ userName, userEmail, onLogout, onOpenAuth }) => {
             type="button"
             className="_hover03"
             id="btnExit"
-            onClick={onLogout}
+            onClick={onUserClick}
           >
             Выйти
           </button>

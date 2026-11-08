@@ -1,19 +1,9 @@
 import './Categories.css'; // Подключаем стили
 
-/**
- * Компонент "Выбор категории".
- *
- * @param {string} activeCategory - Текущая активная категория ('_orange', '_green' или '_purple')
- * @param {array} categories - Массив доступных категорий с цветами.
- * @param {function} onSelect - Функция-обработчик выбора новой категории.
- */
+
 const Categories = ({ activeCategory, categories, onSelect }) => {
-  /**
-   * Генерирует JSX-элемент для одной категории.
-   * 
-   * @param {{ name: string, colorClass: string }} category Объект категории
-   * @returns Элемент <div>
-   */
+     
+  
   const renderCategoryItem = (category) => (
     <div
       key={category.colorClass}

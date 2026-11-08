@@ -2,21 +2,17 @@
 import { useState } from 'react';
 import './Header.css';
 import PopUser from '../PopUser/PopUser';
-import Logo from '../assets/logo.png'; // Убедитесь, что путь к логотипу верен
+import Logo from '../assets/logo.png'; 
 
-/**
- * Компонент шапки приложения.
- * Теперь управляет модальным окном подтверждения выхода
- * и кнопкой создания новой задачи.
- */
-const Header = ({ userName, userEmail, onLogout, onOpenAuth, onNewCard }) => {
+
+const Header = ({ userName, userEmail, onUserClick, onOpenAuth, onNewCard }) => {
   // Состояние для модального окна выхода
   const [isExitModalOpen, setIsExitModalOpen] = useState(false);
 
   const openExitPopup = () => setIsExitModalOpen(true);
   const closeExitPopup = () => setIsExitModalOpen(false);
   const handleConfirmExit = () => {
-    onLogout();
+    onUserClick();
     closeExitPopup();
   };
 
@@ -48,7 +44,7 @@ const Header = ({ userName, userEmail, onLogout, onOpenAuth, onNewCard }) => {
                <PopUser
                userName={userName}
                userEmail={userEmail}
-              onLogout={openExitPopup} // Теперь открываем локальный попап
+              onUserClick={openExitPopup} 
               onOpenAuth={onOpenAuth}
                />
             </div>
