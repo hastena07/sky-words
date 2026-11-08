@@ -1,0 +1,139 @@
+@media screen and (max-width: 660px) {
+    .Pop-new-card {
+        top: 70px;
+    }
+    .Pop-new-card__container {
+        padding: 0;
+        justify-content: flex-start;
+    }
+    .Pop-new-card__block {
+        border-radius: 0;
+    }
+    .Pop-new-card__wrap {
+        display: block;
+    }
+    .Calendar {
+        max-width: 340px;
+        width: 100%;
+    }
+    .Calendar__ttl,
+    .Calendar__nav,
+    .Calendar__period {
+        padding: 0;
+    }
+    .Calendar .date-create {
+        display: none;
+        margin-bottom: 7px;
+    }
+    .Calendar__p {
+        font-size: 14px;
+    }
+    .Calendar__day-name {
+        font-size: 14px;
+    }
+    .Calendar__cells {
+        width: 344px;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .Calendar__cell {
+        width: 42px;
+        height: 42px;
+        font-size: 14px;
+    }
+    .Pop-browse {
+        top: 70px;
+    }
+    .Pop-browse__container {
+        padding: 0;
+        justify-content: flex-start;
+    }
+    .Pop-browse__block {
+        border-radius: 0;
+    }
+    .Pop-browse__wrap {
+        display: block;
+    }
+}
+
+
+@media screen and (max-width: 495px) {
+    .Pop-new-card__container {
+        padding: 0;
+        justify-content: flex-start;
+    }
+    .Pop-new-card__block {
+        padding: 20px 16px 32px;
+    }
+    .Pop-new-card__form {
+        max-width: 100%;
+        width: 100%;
+        display: block;
+    }
+    .Pop-new-card__calendar {
+        width: 100%;
+    }
+    .Form-new__area {
+        max-width: 100%;
+        height: 34px;
+    }
+    .Form-new__create {
+        width: 100%;
+        height: 40px;
+    }
+    .Pop-browse__block {
+        padding: 20px 16px 32px;
+    }
+    .Pop-browse__content .theme-down {
+        display: block;
+        margin-bottom: 20px;
+    }
+    .Pop-browse__content .theme-top {
+        display: none;
+    }
+    .Pop-browse__form {
+        max-width: 100%;
+    }
+    .Pop-browse__calendar {
+        width: 100%;
+    }
+    .Pop-browse__btn-browse button,
+    .Pop-browse__btn-edit button {
+        width: 100%;
+        height: 40px;
+    }
+    .Pop-browse__btn-browse .btn-group,
+    .Pop-browse__btn-edit .btn-group {
+        width: 100%;
+    }
+    .Pop-browse__btn-browse .btn-group button,
+    .Pop-browse__btn-edit .btn-group button {
+        margin-right: 0px;
+    }
+    .Form-browse__area {
+        max-width: 100%;
+        height: 37px;
+    }
+}
+
+
+@media only screen and (max-width: 375px) {
+    .Pop-exit__block {
+        padding: 50px 20px;
+    }
+    .Pop-exit__exit-yes {
+        width: 100%;
+        height: 40px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .Pop-exit__exit-no {
+        width: 100%;
+        height: 40px;
+    }
+    .Pop-exit__form-group {
+        display: block;
+    }
+}
