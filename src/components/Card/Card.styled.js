@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { colors } from '../../theme';
 
 export const CardItem = styled.div`
   padding: 5px;
@@ -11,16 +10,17 @@ export const CardItem = styled.div`
 export const CardBox = styled.div`
   width: 220px;
   height: 130px;
-  background-color: ${colors.white};
+  background-color: ${({ theme }) => theme.cardBg};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: stretch;
   padding: 15px 13px 19px;
+  cursor: pointer;
 `;
 
-export const Group = styled.div`
+export const CardGroup = styled.div`
   width: 100%;
   height: 20px;
   margin-bottom: 12px;
@@ -29,19 +29,16 @@ export const Group = styled.div`
   justify-content: space-between;
 `;
 
-/* Цвет темы берётся из объекта colors.topics по названию темы */
-export const ThemeTag = styled.div`
+/* $class — colorClass темы (_orange, _green, _purple) */
+export const CardTheme = styled.div`
   width: auto;
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
-  display: flex;
-  align-items: center;
-
-  background-color: ${({ $topic }) =>
-    (colors.topics[$topic] || colors.topics.default).bg};
-  color: ${({ $topic }) =>
-    (colors.topics[$topic] || colors.topics.default).color};
+  background-color: ${({ theme, $class }) =>
+    (theme.topics[$class] || theme.topics._gray).bg};
+  color: ${({ theme, $class }) =>
+    (theme.topics[$class] || theme.topics._gray).color};
 
   p {
     font-size: 10px;
@@ -50,25 +47,31 @@ export const ThemeTag = styled.div`
   }
 `;
 
-export const MenuBtn = styled.button`
+export const CardBtn = styled.div`
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 2px;
-  border: none;
-  background-color: ${colors.white};
 
   div {
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background-color: ${colors.textGray};
+    background-color: ${({ theme }) => theme.textGray};
   }
 `;
 
-export const Content = styled.div`
+export const CardTitle = styled.h3`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: ${({ theme }) => theme.text};
+  margin-bottom: 10px;
+`;
+
+export const CardContent = styled.div`
   height: 64px;
   display: flex;
   flex-direction: column;
@@ -76,32 +79,21 @@ export const Content = styled.div`
   justify-content: space-between;
 `;
 
-export const TitleLink = styled.a`
-  display: block;
-`;
-
-export const Title = styled.h3`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  color: ${colors.black};
-  margin-bottom: 10px;
-`;
-
-export const DateBlock = styled.div`
+export const CardDate = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  svg {
+    width: 13px;
+    height: 13px;
+  }
 `;
 
-export const CalendarIcon = styled.svg`
-  width: 13px;
-`;
-
-export const DateText = styled.p`
+export const CardDateText = styled.p`
   margin-left: 6px;
   font-size: 10px;
   line-height: 13px;
-  color: ${colors.textGray};
+  color: ${({ theme }) => theme.textGray};
   letter-spacing: 0.2px;
 `;

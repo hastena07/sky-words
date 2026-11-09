@@ -1,128 +1,122 @@
-import { useState, useEffect } from 'react';
-import { Wrapper, LoadingState, LoadingMessage } from './App.styled';
+// src/App.jsx
+import { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { themes } from './theme';
+import { GlobalStyle } from './styles/GlobalStyle';
+import { Wrapper } from './App.styled';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ModalManager from './components/ModalManager/ModalManager';
-import { initialCards } from './data'; 
+import SignIn from './components/Auth/SignIn';
+import SignUp from './components/Auth/SignUp';
 
-const COLUMNS = [
-  'Без статуса',
-  'Нужно сделать',
-  'В работе',
-  'Тестирование',
-  'Готово',
+const INITIAL_TASKS = [
+  {
+    title: 'Без статуса',
+    cards: [
+      { id: 1, topic: '_orange', title: 'Название задачи', date: '30.10.25' },
+      { id: 2, topic: '_purple', title: 'Собрать отзывы по макету', date: '31.10.25' },
+    ],
+  },
+  {
+    title: 'Нужно сделать',
+    cards: [
+      { id: 3, topic: '_green', title: ' Стилизовать интерфейс с помощью Styled Components', date: '01.11.25' },
+    ],
+  },
+  { title: 'В работе',
+     cards: [
+       { id: 3, topic: '_green', title: 'Исследовать конкурентов', date: '01.11.25' },
+      ] 
+    },
+  { title: 'Тестирование',
+     cards: [{
+       id: 4, topic: '_orange', title: 'Подобрать библиотеку для графиков', date: '30.10.25' },
+      { id: 2, topic: '_purple', title: 'Собрать отзывы по макету', date: '31.10.25' },
+    ] },
+  { title: 'Готово', cards: [
+    { id: 5, topic: '_purple', title: 'Написать текст для рассылки', date: '31.10.25' },
+  ] },
 ];
 
-function App() {
-  const [isLoading, setLoading] = useState(true);
-
-  const [tasks, setTasks] = useState(
-    COLUMNS.map((title) => ({
-      title,
-      cards: initialCards.filter((card) => card.status === title),
-    }))
-  );
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
+  const App = () => {
+  const [isDark, setIsDark] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState('signin');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState('');
+  const [modalType, setModalType] = useState(null);
   const [currentCard, setCurrentCard] = useState(null);
-  const [currentColumnForNewCard, setCurrentColumnForNewCard] = useState(0);
+  const [tasks, setTasks] = useState(INITIAL_TASKS);
 
-  const openNewCardPopup = (columnIndex) => {
-    setCurrentColumnForNewCard(columnIndex);
-    setModalType('new-card');
+  const theme = isDark ? themes.dark : themes.light;
+
+  const openModal = (type) => {
+    setModalType(type);
     setIsModalOpen(true);
   };
+  const closeModal = () => setIsModalOpen(false);
 
-  const openBrowsePopup = (cardData) => {
-    setCurrentCard(cardData);
-    setModalType('browse');
-    setIsModalOpen(true);
+  const openCard = (card) => {
+    setCurrentCard(card);
+    openModal('browse');
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setModalType('');
-    setCurrentCard(null);
-  };
-
-  const addTaskToColumn = (columnIndex, newCard) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((column, index) =>
-        index === columnIndex
-          ? { ...column, cards: [...column.cards, newCard] }
-          : column
+  const createCard = ({ title, category, date }) => {
+    const formattedDate = date
+      ? new Date(date).toLocaleDateString('ru-RU')
+      : '—';
+    const newCard = { id: Date.now(), topic: category, title, date: formattedDate };
+    setTasks((prev) =>
+      prev.map((column, index) =>
+        index === 0 ? { ...column, cards: [newCard, ...column.cards] } : column
       )
     );
   };
 
-  const createCard = (title, topic, date) => {
-    const newCard = {
-      id: `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
-      topic,
-      title,
-      description: '',
-      date,
-      status: tasks[currentColumnForNewCard].title,
-    };
-    addTaskToColumn(currentColumnForNewCard, newCard);
+  const handleLogout = () => {
     closeModal();
+    setAuthMode('signin');
+    setIsAuthOpen(true);
   };
 
-  const moveCardBetweenColumns = (fromCol, toCol, cardId) => {
-    setTasks((prevTasks) => {
-      const updatedColumns = prevTasks.map((column) => ({
-        ...column,
-        cards: [...column.cards],
-      }));
-      const fromIdx = updatedColumns[fromCol].cards.findIndex(
-        (card) => card.id === cardId
-      );
-      if (fromIdx === -1 || fromCol === toCol) return prevTasks;
-      const [movingCard] = updatedColumns[fromCol].cards.splice(fromIdx, 1);
-      updatedColumns[toCol].cards.push(movingCard);
-      return updatedColumns;
-    });
-  };
-
-  if (isLoading) {
+  if (isAuthOpen) {
     return (
-      <LoadingState>
-        <LoadingMessage>Данные загружаются</LoadingMessage>
-      </LoadingState>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {authMode === 'signup' ? (
+          <SignUp onSwitchMode={() => setAuthMode('signin')} onEnter={() => setIsAuthOpen(false)} />
+        ) : (
+          <SignIn onSwitchMode={() => setAuthMode('signup')} onEnter={() => setIsAuthOpen(false)} />
+        )}
+      </ThemeProvider>
     );
   }
 
   return (
-    <Wrapper>
-      <Header
-        userName="Ivan Ivanov"
-        userEmail="Ivan.Ivanov@mail.com"
-        onLogout={() => console.log('Выход из аккаунта')}
-      />
-
-      <Main
-        tasks={tasks}
-        onMoveCard={moveCardBetweenColumns}
-        onCardView={openBrowsePopup}
-      />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Wrapper>
+        <Header
+          userName="Ivan Ivanov"
+          userEmail="user@test.ru"
+          onUserClick={() => openModal('exit')}
+          onNewCard={() => openModal('new-card')}
+          isDark={isDark}
+          onToggleTheme={() => setIsDark(!isDark)}
+        />
+        <Main tasks={tasks} onCardView={openCard} />
+      </Wrapper>
 
       <ModalManager
         isOpen={isModalOpen}
         modalType={modalType}
-        currentCard={currentCard}
         onClose={closeModal}
+        onConfirmExit={handleLogout}
         onCreate={createCard}
+        currentCard={currentCard}
       />
-    </Wrapper>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

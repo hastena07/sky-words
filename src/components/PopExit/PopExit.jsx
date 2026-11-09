@@ -1,4 +1,4 @@
-import './PopExit.css';
+import { Block, Ttl, Buttons, BtnBgExit, BtnBorderExit } from './PopExit.styled';
 
 /**
  * Модальное окно подтверждения выхода.
@@ -8,32 +8,20 @@ import './PopExit.css';
  */
 const PopExit = ({ onConfirm, onClose }) => {
   return (
-    <div className="PopExit">
-      <div className="PopExit__container">
-        <div className="PopExit__block">
-          <h2 className="PopExit__ttl">Выйти из аккаунта?</h2>
-          <form className="PopExit__form" id="formExit" action="#">
-            <div className="PopExit__buttons">
-              <button
-                type="button"
-                className="PopExit__exit-yes _hover01"
-                onClick={onConfirm}
-              >
-                Да, выйти
-              </button>
+    <Block>
+      <Ttl>Выйти из аккаунта?</Ttl>
+      <form id="formExit" action="#" onSubmit={(e) => e.preventDefault()}>
+        <Buttons>
+          <BtnBgExit type="button" onClick={onConfirm}>
+            Да, выйти
+          </BtnBgExit>
 
-              <button
-                type="button"
-                className="PopExit__exit-no _hover03"
-                onClick={onClose}
-              >
-                Нет, остаться
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+          <BtnBorderExit type="button" onClick={onClose}>
+            Нет, остаться
+          </BtnBorderExit>
+        </Buttons>
+      </form>
+    </Block>
   );
 };
 

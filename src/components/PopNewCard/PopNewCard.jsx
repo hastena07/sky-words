@@ -1,11 +1,20 @@
-import './PopNewCard.css';
+import { useState } from 'react';
+import {
+  Root, Container, Block, Content, Ttl, CloseBtn,
+  Wrap, Form, Subttl, Input, Area, CalendarWrap, Actions, BtnCreate,
+} from './PopNewCard.styled';
 import Categories from '../Categories/Categories';
+import Calendar from '../Calendar/Calendar';
 
+const PopNewCard = ({ onCreate, onClose }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('_orange');
+  const [date, setDate] = useState('');
 
-const PopNewCard = ({ onCreate }) => {
-  const [title, setTitle] = React.useState('');
-  const [category, setCategory] = React.useState('_orange');
-  const [date, setDate] = React.useState('');
+  const now = new Date();
+  const monthName = now.toLocaleString('ru-RU', { month: 'long' });
+  const year = now.getFullYear();
 
   const handleCreate = (e) => {
     e.preventDefault();
@@ -13,72 +22,75 @@ const PopNewCard = ({ onCreate }) => {
       alert('Введите название задачи');
       return;
     }
-    console.log('Данные новой задачи:', { title, category, date });
-    onCreate(); 
+    onCreate({ title, description, category, date });
+    onClose();
   };
 
-  
   const categoriesList = [
     { name: 'Web Design', colorClass: '_orange' },
     { name: 'Research', colorClass: '_green' },
-    { name: 'Meeting', colorClass: '_purple' },
+    { name: 'Copywriting', colorClass: '_purple' },
   ];
-  
 
   return (
-    <div className="PopNewCard">
-      <div className="PopNewCard__container">
-        <div className='PopNewCard__block'> 
-          <div className='PopNewCard__content'>  
-             <h2 className="PopNewCard__ttl">Создание задачи</h2>
-             <a href="#" className="PopNewCard__close">&#10006;</a>
-              <div className="PopNewCard__wrap">
+    <Root>
+      <Container>
+        <Block>
+          <CloseBtn type="button" aria-label="Закрыть окно" onClick={onClose}>
+            &#10006;
+          </CloseBtn>
 
+          <Content>
+            <Ttl>Создание задачи</Ttl>
 
+            {/* Две колонки: форма слева, календарь справа */}
+            <Wrap>
+              <Form onSubmit={handleCreate} id="formNewCard">
+                <label htmlFor="formTitle">
+                  <Subttl as="span">Название задачи</Subttl>
+                </label>
+                <Input
+                  id="formTitle"
+                  type="text"
+                  placeholder="Введите название задачи..."
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  autoFocus
+                />
+                <label htmlFor="formTitle">
+                  <Subttl as="span">Описание задачи</Subttl>
+                </label>
+                <Area
+                  placeholder="Введите описание задачи..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                
+                <Categories
+                  activeCategory={category}
+                  categories={categoriesList}
+                  onSelect={(selected) => setCategory(selected)}
+                />
 
-          <form onSubmit={handleCreate} className="PopNewCard__form form-new" id="formNewCard" action="#">
-         <label for="formTitle" className="subttl">Название задачи</label>
-          <input
-            type="text"
-            className="PopNewCard__input"
-            
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            autoFocus
-          />
+                
+                <Actions>
+                  <BtnCreate type="submit">Создать задачу</BtnCreate>
+                </Actions>
+              </Form>
 
-          <Categories
-            activeCategory={category}
-            categories={categoriesList}
-            onSelect={(selected) => setCategory(selected)}
-          />
-
-          <input
-            type="date"
-            className="PopNewCard__input"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-
-          <div className="PopNewCard__actions">
-            <button type="submit" className="_btn-bg _hover01">
-              Создать
-            </button>
-          </div>
-        </form>  
-              </div>
-          </div>
-          
-        
-        
-          </div>
-        
-      </div>
-    </div>
+              {/* Календарь — отдельная колонка, не внутри формы */}
+              <CalendarWrap>
+                <label htmlFor="formTitle">
+                  <Subttl as="span">Даты</Subttl>
+                </label>
+                <Calendar month={monthName} year={year} />
+              </CalendarWrap>
+            </Wrap>
+          </Content>
+        </Block>
+      </Container>
+    </Root>
   );
 };
-
-// Важно: импортируем React, если он не импортирован глобально
-import React from 'react';
 
 export default PopNewCard;

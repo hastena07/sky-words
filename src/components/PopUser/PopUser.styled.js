@@ -1,9 +1,7 @@
-// src/components/PopUser/PopUser.styled.js
 import styled from 'styled-components';
-import { colors } from '../../theme';
 
 export const Wrapper = styled.div`
-  /* без position: relative — попап позиционируется от HeaderBlock, как в исходной вёрстке */
+  /* Попап позиционируется от HeaderBlock (position: relative) */
 `;
 
 export const HeaderUser = styled.button`
@@ -14,30 +12,30 @@ export const HeaderUser = styled.button`
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: ${colors.primary};
+  color: ${({ theme }) => theme.headerUserColor};
   background: none;
   border: none;
+  padding: 0;
   cursor: pointer;
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 6px;
     height: 6px;
     border-radius: 1px;
-    border-left: 1.9px solid ${colors.primary};
-    border-bottom: 1.9px solid ${colors.primary};
+    border-left: 1.9px solid ${({ theme }) => theme.headerUserColor};
+    border-bottom: 1.9px solid ${({ theme }) => theme.headerUserColor};
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
-    padding: 0;
   }
 
   &:hover {
-    color: ${colors.primaryHover};
+    color: ${({ theme }) => theme.popAccentHover};
 
     &::after {
-      border-left-color: ${colors.primaryHover};
-      border-bottom-color: ${colors.primaryHover};
+      border-left-color: ${({ theme }) => theme.popAccentHover};
+      border-bottom-color: ${({ theme }) => theme.popAccentHover};
     }
   }
 `;
@@ -49,46 +47,46 @@ export const PopUserSet = styled.div`
   width: 213px;
   min-height: 205px;
   border-radius: 10px;
-  border: 0.7px solid ${colors.border};
-  background: ${colors.white};
-  box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
+  border: 0.7px solid ${({ theme }) => theme.popoverBorder};
+  background: ${({ theme }) => theme.popoverUserBg};
+  box-shadow: ${({ theme }) => theme.popoverShadow};
   padding: 34px;
   text-align: center;
   z-index: 2;
-  display: block;
 `;
 
 export const SetName = styled.p`
+  color: ${({ theme }) => theme.text};
   font-size: 14px;
   font-weight: 500;
-  color: ${colors.black};
-  margin: 0 0 4px;
+  line-height: 21px;
+  letter-spacing: -0.14px;
+  margin-bottom: 4px;
 `;
 
 export const SetMail = styled.p`
+  color: ${({ theme }) => theme.textGray};
   font-size: 14px;
-  color: ${colors.textGray};
-  margin: 0 0 16px;
+  line-height: 21px;
+  letter-spacing: -0.14px;
+  margin-bottom: 10px;
 `;
 
 export const ThemeToggle = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 16px;
+  justify-content: space-between;
+  margin-bottom: 30px;
 
   p {
-    margin: 0;
+    color: ${({ theme }) => theme.text};
     font-size: 14px;
-    color: ${colors.black};
-  }
-
-  input {
-    cursor: pointer;
+    line-height: 21px;
+    letter-spacing: -0.14px;
   }
 `;
 
+/* Тумблер тёмной темы */
 export const Checkbox = styled.input`
   position: relative;
   width: 24px;
@@ -96,7 +94,7 @@ export const Checkbox = styled.input`
   border: none;
   margin: 0;
   border-radius: 100px;
-  background: #EAEEF6;
+  background: ${({ theme }) => theme.toggleTrack};
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -104,40 +102,36 @@ export const Checkbox = styled.input`
   cursor: pointer;
   flex-shrink: 0;
 
- 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 1px;
     left: 1px;
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: #94A6BE;
+    background-color: ${({ theme }) => theme.toggleKnob};
     transition: 0.5s;
   }
 
- 
   &:checked::before {
     left: 12px;
   }
 `;
 
-
 export const BtnExit = styled.button`
   width: 72px;
   height: 30px;
-  border-radius: 4px;
-  border: 1px solid ${colors.primary};
   background: transparent;
-  color: ${colors.primary};
+  color: ${({ theme }) => theme.popAccent};
+  border-radius: 4px;
+  border: 1px solid ${({ theme }) => theme.popAccent};
   font-family: inherit;
   font-size: 14px;
-  font-weight: 500;
   cursor: pointer;
 
   &:hover {
-    color: ${colors.primaryHover};
-    border-color: ${colors.primaryHover};
+    color: ${({ theme }) => theme.popAccentHover};
+    border-color: ${({ theme }) => theme.popAccentHover};
   }
 `;

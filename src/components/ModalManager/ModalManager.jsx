@@ -1,4 +1,4 @@
-import './ModalManager.css';
+import { Backdrop, PopUpContainer } from './ModalManager.styled';
 import PopExit from '../PopExit/PopExit';
 import PopNewCard from '../PopNewCard/PopNewCard';
 import PopBrowse from '../PopBrowse/PopBrowse';
@@ -8,18 +8,10 @@ const ModalManager = ({
   modalType,
   onClose,
   onConfirmExit,
-  currentCard /* Данные текущей карты */
+  onCreate,
+  currentCard,
 }) => {
-  if (!isOpen) return null; 
-  const backdropStyle = { 
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100vh',
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    zIndex: 9998
-  };
+  if (!isOpen) return null;
 
   let content;
 
@@ -27,25 +19,15 @@ const ModalManager = ({
     case 'exit':
       content = <PopExit onClose={onClose} onConfirm={onConfirmExit} />;
       break;
-    
+
     case 'new-card':
-      content = (
-        <PopNewCard 
-          onCreate={(title, category, date) => {
-            console.log('Создана задача:', title);
-            onClose();
-          }}
-          onCancel={onClose}
-        />
-      );
+      content = <PopNewCard onCreate={onCreate} onClose={onClose} />;
       break;
 
     case 'browse':
       content = (
-        <PopBrowse 
-          {...currentCard} 
-          onEdit={() => console.log('Редактируем задачу')}
-          onDelete={() => console.log('Удаляем задачу')}
+        <PopBrowse
+          {...currentCard}
           onClose={onClose}
         />
       );
@@ -57,13 +39,10 @@ const ModalManager = ({
 
   return (
     <>
-      {/* Полупрозрачный фон */}
-      <div style={backdropStyle}></div>
-      
-      {/* Само содержимое окна */}
-      {content && <div className="PopUp__container">{content}</div>}
+      <Backdrop />
+      {content && <PopUpContainer>{content}</PopUpContainer>}
     </>
-  )
+  );
 };
 
 export default ModalManager;

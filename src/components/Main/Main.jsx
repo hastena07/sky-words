@@ -1,13 +1,13 @@
 // src/components/Main/Main.jsx
 import Column from '../Column/Column';
 import { Container } from '../../App.styled';
-import { MainBlock as MainStyled, MainInner, MainContent } from './Main.styled';
+import { Main as MainStyled, MainBlock, MainContent } from './Main.styled';
 
-const Main = ({ tasks, onMoveCard, onCardView }) => {
+const Main = ({ tasks, onCardView }) => {
   return (
     <MainStyled>
-      <Container>
-        <MainInner>
+      <MainBlock>
+        <Container>
           <MainContent>
             {tasks.map((column, index) => (
               <Column
@@ -18,8 +18,8 @@ const Main = ({ tasks, onMoveCard, onCardView }) => {
               />
             ))}
           </MainContent>
-        </MainInner>
-      </Container>
+        </Container>
+      </MainBlock>
     </MainStyled>
   );
 };

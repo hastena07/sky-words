@@ -1,48 +1,39 @@
+import { TOPIC_NAMES } from '../../theme';
 import {
-  CardBox, Group, ThemeTag, MenuBtn,
-  Content, TitleLink, Title, DateBlock, CalendarIcon, DateText,
+  CardItem, CardBox, CardGroup, CardTheme,
+  CardBtn, CardContent, CardTitle, CardDate, CardDateText,
 } from './Card.styled';
 
-const Card = ({ title, category, date, onView }) => {
+const Card = ({ card, onCardClick }) => {
   return (
-    <CardBox>
-      <Group>
-        <ThemeTag $topic={category}>
-          <p>{category}</p>
-        </ThemeTag>
+    <CardItem>
+      <CardBox onClick={onCardClick}>
+        <CardGroup>
+          <CardTheme $class={card.topic}>
+            <p>{TOPIC_NAMES[card.topic] || 'Без темы'}</p>
+          </CardTheme>
+          <CardBtn>
+            <div />
+            <div />
+            <div />
+          </CardBtn>
+        </CardGroup>
 
-        <MenuBtn type="button" aria-label="Действия с задачей" onClick={onView}>
-          <div></div><div></div><div></div>
-        </MenuBtn>
-      </Group>
+        {/* Название и дата в одном блоке */}
+        <CardContent>
+          <CardTitle>{card.title}</CardTitle>
 
-      <Content>
-        <TitleLink href="" target="_blank">
-          <Title>{title}</Title>
-        </TitleLink>
-
-        <DateBlock>
-          <CalendarIcon
-            xmlns="http://www.w3.org/2000/svg"
-            width="13"
-            height="13"
-            viewBox="0 0 13 13"
-            fill="none"
-          >
-            <g clipPath="url(#clip0_1_415)">
-              <path d="M10.5625 2.03125H2.4375C1.7644 2.03125 1.21875 2.5769 1.21875 3.25V10.5625C1.21875 11.2356 1.7644 11.7812 2.4375 11.7812H10.5625C11.2356 11.7812 11.7812 11.2356 11.7812 10.5625V3.25C11.7812 2.5769 11.2356 2.03125 10.5625 2.03125Z" stroke="#94A6BE" strokeWidth="0.8" strokeLinejoin="round" />
-              <path d="M11.7812 4.0625H1.21875M3.25 1.21875V2.03125V1.21875ZM9.75 1.21875V2.03125V1.21875Z" stroke="#94A6BE" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
-            </g>
-            <defs>
-              <clipPath id="clip0_1_415">
-                <rect width="13" height="13" fill="white" />
-              </clipPath>
-            </defs>
-          </CalendarIcon>
-          <DateText>{date}</DateText>
-        </DateBlock>
-      </Content>
-    </CardBox>
+          <CardDate>
+            <svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.5" y="2" width="12" height="10.5" rx="1.5" fill="none" stroke="#94A6BE" />
+              <path d="M3.5 0.5V3.5M9.5 0.5V3.5" stroke="#94A6BE" />
+              <path d="M0.5 5.5H12.5" stroke="#94A6BE" />
+            </svg>
+            <CardDateText>{card.date}</CardDateText>
+          </CardDate>
+        </CardContent>
+      </CardBox>
+    </CardItem>
   );
 };
 

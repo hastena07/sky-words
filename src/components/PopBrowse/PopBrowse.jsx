@@ -1,4 +1,9 @@
-import '../PopBrowse/PopBrowse';
+import { TOPIC_NAMES } from '../../theme';
+import {
+  Root, Container, Block, Content, TopBlock, Ttl, CloseBtn,
+  Category, Description, Actions,
+} from './PopBrowse.styled';
+import { BtnBg, BtnBorder } from '../ui/Buttons.styled';
 
 /**
  * Модальное окно просмотра карточки.
@@ -11,38 +16,37 @@ import '../PopBrowse/PopBrowse';
  */
 const PopBrowse = ({ title, description, category, date, onClose }) => {
   return (
-    <div className="PopBrowse">
-      <div className="PopBrowse__container">
-        <div className="PopBrowse__header">
-          <h2 className="PopBrowse__title">{title}</h2>
-          <button
-            type="button"
-            className="PopBrowse__close _hover03"
-            aria-label="Закрыть окно"
-            onClick={onClose}
-          >
-            ×
-          </button>
-        </div>
+    <Root>
+      <Container>
+        <Block>
+          <CloseBtn type="button" aria-label="Закрыть окно" onClick={onClose}>
+            &#10006;
+          </CloseBtn>
 
-        <div className={`PopBrowse__category ${category}`}>
-          <span>{category.replace('_', '')}</span>
-        </div>
+          <Content>
+            <TopBlock>
+              <Ttl>{title}</Ttl>
+            </TopBlock>
 
-        <p className="PopBrowse__date">Срок: {date}</p>
+            <Category $class={category}>
+              <p>{TOPIC_NAMES[category] || 'Без темы'}</p>
+            </Category>
 
-        <div className="PopBrowse__description">
-          <p>{description || 'Описание отсутствует'}</p>
-        </div>
+            <Description>
+              <p>Срок: {date}</p>
+              <p>{description || 'Описание отсутствует'}</p>
+            </Description>
 
-        <div className="PopBrowse__actions">
-          <button type="button" className="_btn-bg _hover01">Редактировать</button>
-          <button type="button" className="_btn-outline _hover03" onClick={onClose}>
-            Закрыть
-          </button>
-        </div>
-      </div>
-    </div>
+            <Actions>
+              <BtnBg type="button">Редактировать</BtnBg>
+              <BtnBorder type="button" onClick={onClose}>
+                Закрыть
+              </BtnBorder>
+            </Actions>
+          </Content>
+        </Block>
+      </Container>
+    </Root>
   );
 };
 
