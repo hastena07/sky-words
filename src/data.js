@@ -1,5 +1,7 @@
-export const tasks = [
-  { 
+
+
+export const initialCards = [
+  {
     id: 1,
     topic: 'Web Design',
     title: 'Название задачи',

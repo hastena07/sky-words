@@ -1,77 +1,128 @@
-import { useEffect, useState } from 'react';
-import Header from './components/Header/Header.jsx';
-import Main from './components/Main/Main.jsx';
-import PopNewCard from './components/popups/PopNewCard/PopNewCard.jsx';
-import PopBrowse from './components/popups/PopBrowse/PopBrowse.jsx';
-import PopExit from './components/popups/PopExit/PopExit.jsx';
-import { tasks as initialTasks } from './data.js';
-import { Wrapper } from './App.styled.js';
+import { useState, useEffect } from 'react';
+import { Wrapper, LoadingState, LoadingMessage } from './App.styled';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import ModalManager from './components/ModalManager/ModalManager';
+import { initialCards } from './data'; 
 
-export default function App({ isDark, onThemeToggle }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [popNewOpen, setPopNewOpen] = useState(false);
-  const [popBrowseOpen, setPopBrowseOpen] = useState(false);
-  const [popExitOpen, setPopExitOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
+const COLUMNS = [
+  'Без статуса',
+  'Нужно сделать',
+  'В работе',
+  'Тестирование',
+  'Готово',
+];
+
+function App() {
+  const [isLoading, setLoading] = useState(true);
+
+  const [tasks, setTasks] = useState(
+    COLUMNS.map((title) => ({
+      title,
+      cards: initialCards.filter((card) => card.status === title),
+    }))
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setData(initialTasks);
-      setIsLoading(false);
-    }, 1000);
+      setLoading(false);
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleCardClick = (task) => {
-    setSelectedTask(task);
-    setPopBrowseOpen(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
+  const [currentCard, setCurrentCard] = useState(null);
+  const [currentColumnForNewCard, setCurrentColumnForNewCard] = useState(0);
+
+  const openNewCardPopup = (columnIndex) => {
+    setCurrentColumnForNewCard(columnIndex);
+    setModalType('new-card');
+    setIsModalOpen(true);
   };
 
-  const handleCreate = (task) => {
-    setData((prev) => [...prev, { ...task, id: Date.now() }]);
-    setPopNewOpen(false);
+  const openBrowsePopup = (cardData) => {
+    setCurrentCard(cardData);
+    setModalType('browse');
+    setIsModalOpen(true);
   };
 
-  const handleDelete = (id) => {
-    setData((prev) => prev.filter((t) => t.id !== id));
-    setPopBrowseOpen(false);
-    setSelectedTask(null);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalType('');
+    setCurrentCard(null);
   };
 
-  const handleStatusChange = (id, status) => {
-    setData((prev) => prev.map((t) => (t.id === id ? { ...t, status } : t)));
-    setSelectedTask((prev) => (prev ? { ...prev, status } : prev));
+  const addTaskToColumn = (columnIndex, newCard) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((column, index) =>
+        index === columnIndex
+          ? { ...column, cards: [...column.cards, newCard] }
+          : column
+      )
+    );
   };
+
+  const createCard = (title, topic, date) => {
+    const newCard = {
+      id: `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+      topic,
+      title,
+      description: '',
+      date,
+      status: tasks[currentColumnForNewCard].title,
+    };
+    addTaskToColumn(currentColumnForNewCard, newCard);
+    closeModal();
+  };
+
+  const moveCardBetweenColumns = (fromCol, toCol, cardId) => {
+    setTasks((prevTasks) => {
+      const updatedColumns = prevTasks.map((column) => ({
+        ...column,
+        cards: [...column.cards],
+      }));
+      const fromIdx = updatedColumns[fromCol].cards.findIndex(
+        (card) => card.id === cardId
+      );
+      if (fromIdx === -1 || fromCol === toCol) return prevTasks;
+      const [movingCard] = updatedColumns[fromCol].cards.splice(fromIdx, 1);
+      updatedColumns[toCol].cards.push(movingCard);
+      return updatedColumns;
+    });
+  };
+
+  if (isLoading) {
+    return (
+      <LoadingState>
+        <LoadingMessage>Данные загружаются</LoadingMessage>
+      </LoadingState>
+    );
+  }
 
   return (
     <Wrapper>
       <Header
-        onNewCard={() => setPopNewOpen(true)}
-        onExit={() => setPopExitOpen(true)}
-        isDark={isDark}
-        onThemeToggle={onThemeToggle}
+        userName="Ivan Ivanov"
+        userEmail="Ivan.Ivanov@mail.com"
+        onLogout={() => console.log('Выход из аккаунта')}
       />
+
       <Main
-        tasks={data}
-        isLoading={isLoading}
-        onCardClick={handleCardClick}
+        tasks={tasks}
+        onMoveCard={moveCardBetweenColumns}
+        onCardView={openBrowsePopup}
       />
-      {popNewOpen && (
-        <PopNewCard
-          onClose={() => setPopNewOpen(false)}
-          onCreate={handleCreate}
-        />
-      )}
-      {popBrowseOpen && selectedTask && (
-        <PopBrowse
-          task={selectedTask}
-          onClose={() => { setPopBrowseOpen(false); setSelectedTask(null); }}
-          onDelete={handleDelete}
-          onStatusChange={handleStatusChange}
-        />
-      )}
-      {popExitOpen && <PopExit onClose={() => setPopExitOpen(false)} />}
+
+      <ModalManager
+        isOpen={isModalOpen}
+        modalType={modalType}
+        currentCard={currentCard}
+        onClose={closeModal}
+        onCreate={createCard}
+      />
     </Wrapper>
   );
 }
+
+export default App;
