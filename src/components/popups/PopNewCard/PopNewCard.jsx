@@ -11,7 +11,7 @@ export default function PopNewCard({ onClose, onCreate }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [topic, setTopic] = useState('Web Design');
-  const [date, setDate] = useState(null); // null = «Выберите срок исполнения»
+  const [date, setDate] = useState(null);
 
   const handleSubmit = (e) => {
     e?.preventDefault();

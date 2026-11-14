@@ -2,7 +2,7 @@ import {
   PopUserBox, PopUserName, PopUserMail, PopUserTheme, ExitBtn, Checkbox,
 } from './PopUser.styled.js';
 
-export default function PopUser({ isDark, onExit, onThemeToggle }) {
+export default function PopUser({ isDark, onThemeToggle, onExit }) {
   return (
     <PopUserBox role="menu" aria-label="Меню пользователя">
       <PopUserName>Ivan Ivanov</PopUserName>

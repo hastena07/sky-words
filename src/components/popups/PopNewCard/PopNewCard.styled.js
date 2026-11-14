@@ -44,13 +44,8 @@ export const PopBlock = styled.div`
   border: 0.7px solid ${({ theme }) => theme.colors.border};
   position: relative;
 
-  @media screen and (max-width: 660px) {
-    border-radius: 0;
-  }
-
-  @media screen and (max-width: 495px) {
-    padding: 20px 16px 32px;
-  }
+  @media screen and (max-width: 660px) { border-radius: 0; }
+  @media screen and (max-width: 495px) { padding: 20px 16px 32px; }
 `;
 
 export const PopContent = styled.div`
@@ -76,9 +71,7 @@ export const PopClose = styled.button`
   font-size: 16px;
   cursor: pointer;
 
-  &:hover {
-    color: ${({ theme }) => theme.colors.textMain};
-  }
+  &:hover { color: ${({ theme }) => theme.colors.textMain}; }
 `;
 
 export const PopWrapInner = styled.div`
@@ -86,9 +79,7 @@ export const PopWrapInner = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 
-  @media screen and (max-width: 660px) {
-    display: block;
-  }
+  @media screen and (max-width: 660px) { display: block; }
 `;
 
 export const FormNew = styled.form`
@@ -97,9 +88,7 @@ export const FormNew = styled.form`
   display: block;
   margin-bottom: 20px;
 
-  @media screen and (max-width: 495px) {
-    max-width: 100%;
-  }
+  @media screen and (max-width: 495px) { max-width: 100%; }
 `;
 
 export const FormNewBlock = styled.div`
@@ -132,7 +121,6 @@ export const FormNewInput = styled.input`
     font-size: 14px;
     line-height: 1px;
     color: ${({ theme }) => theme.colors.textMuted};
-    letter-spacing: -0.14px;
   }
 `;
 
@@ -156,27 +144,17 @@ export const FormNewArea = styled.textarea`
     font-size: 14px;
     line-height: 1px;
     color: ${({ theme }) => theme.colors.textMuted};
-    letter-spacing: -0.14px;
   }
 
-  @media screen and (max-width: 495px) {
-    max-width: 100%;
-    height: 34px;
-  }
+  @media screen and (max-width: 495px) { max-width: 100%; height: 34px; }
 `;
 
 export const CalendarBlock = styled.div`
   width: 182px;
   margin-bottom: 20px;
 
-  @media screen and (max-width: 660px) {
-    max-width: 340px;
-    width: 100%;
-  }
-
-  @media screen and (max-width: 495px) {
-    width: 100%;
-  }
+  @media screen and (max-width: 660px) { max-width: 340px; width: 100%; }
+  @media screen and (max-width: 495px) { width: 100%; }
 `;
 
 export const CreateBtn = styled.button`
@@ -194,13 +172,7 @@ export const CreateBtn = styled.button`
   cursor: pointer;
   transition: background-color 0.2s;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryHover};
-  }
+  &:hover { background-color: ${({ theme }) => theme.colors.primaryHover}; }
 
-  @media screen and (max-width: 495px) {
-    width: 100%;
-    height: 40px;
-    float: none;
-  }
+  @media screen and (max-width: 495px) { width: 100%; height: 40px; float: none; }
 `;

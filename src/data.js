@@ -1,6 +1,6 @@
 
 
-export const initialCards = [
+export const tasks = [
   {
     id: 1,
     topic: 'Web Design',

@@ -41,7 +41,7 @@ export const PopUserTheme = styled.div`
   }
 `;
 
-export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+export const Checkbox = styled.input`
   position: relative;
   width: 24px;
   height: 13px;

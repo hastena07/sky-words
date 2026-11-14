@@ -1,18 +1,42 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { colors } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
-  *, *::before, *::after { box-sizing: border-box; }
-  html, body {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  a,
+  a:visited {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  button,
+  ._btn {
+    cursor: pointer;
+    outline: none;
+    font-family: inherit;
+  }
+  ul li {
+    list-style: none;
+  }
+  html,
+  body,
+  #root {
     width: 100%;
     height: 100%;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
-    color: ${colors.black};
+    font-family: ${({ theme }) => theme.fonts.main};
+    color: ${({ theme }) => theme.colors.textMain};
+    background-color: ${({ theme }) => theme.colors.bgWrapper};
   }
-  a, a:visited { text-decoration: none; cursor: pointer; }
-  button, ._btn { cursor: pointer; outline: none; }
-  ul li { list-style: none; }
-  div, button, a { font-family: inherit; }
+  @keyframes card-animation {
+    0% { height: 0; opacity: 0; }
+    100% { height: auto; opacity: 1; }
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -20,20 +44,7 @@ export const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  background-color: ${colors.bgPage};
-`;
-
-export const LoadingState = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: ${colors.bgPage};
-`;
-
-export const LoadingMessage = styled.div`
-  font-size: 1.2rem;
-  color: ${colors.textMuted};
+  background-color: ${({ theme }) => theme.colors.bgWrapper};
 `;
 
 export const Container = styled.div`

@@ -74,9 +74,7 @@ export default function PopBrowse({ task, onClose, onDelete, onSave }) {
                     </StatusItem>
                   ))
                 ) : (
-                  <StatusItem $active as="div">
-                    {draft.status}
-                  </StatusItem>
+                  <StatusItem $active>{draft.status}</StatusItem>
                 )}
               </StatusThemes>
             </StatusBlock>
@@ -90,7 +88,7 @@ export default function PopBrowse({ task, onClose, onDelete, onSave }) {
                   <BrowseArea
                     id="browseDescription"
                     name="text"
-                    placeholder="Описание задачи"
+                    placeholder="Введите описание задачи..."
                     readOnly={!isEditing}
                     value={draft.description}
                     onChange={(e) =>

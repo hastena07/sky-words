@@ -25,9 +25,7 @@ export const ExitBlock = styled.div`
   border-radius: 10px;
   border: 0.7px solid ${({ theme }) => theme.colors.border};
 
-  @media screen and (max-width: 375px) {
-    padding: 50px 20px;
-  }
+  @media screen and (max-width: 375px) { padding: 50px 20px; }
 `;
 
 export const ExitTitle = styled.h2`
@@ -43,9 +41,7 @@ export const ExitGroup = styled.div`
   justify-content: space-between;
   gap: 10px;
 
-  @media screen and (max-width: 375px) {
-    display: block;
-  }
+  @media screen and (max-width: 375px) { display: block; }
 `;
 
 export const BtnYes = styled.button`

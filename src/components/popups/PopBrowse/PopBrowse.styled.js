@@ -44,13 +44,8 @@ export const BrowseBlock = styled.div`
   border: 0.7px solid ${({ theme }) => theme.colors.border};
   position: relative;
 
-  @media screen and (max-width: 660px) {
-    border-radius: 0;
-  }
-
-  @media screen and (max-width: 495px) {
-    padding: 20px 16px 32px;
-  }
+  @media screen and (max-width: 660px) { border-radius: 0; }
+  @media screen and (max-width: 495px) { padding: 20px 16px 32px; }
 `;
 
 export const BrowseContent = styled.div`
@@ -153,9 +148,7 @@ export const BrowseWrapInner = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 
-  @media screen and (max-width: 660px) {
-    display: block;
-  }
+  @media screen and (max-width: 660px) { display: block; }
 `;
 
 export const FormBrowse = styled.form`
@@ -164,9 +157,7 @@ export const FormBrowse = styled.form`
   display: block;
   margin-bottom: 20px;
 
-  @media screen and (max-width: 495px) {
-    max-width: 100%;
-  }
+  @media screen and (max-width: 495px) { max-width: 100%; }
 `;
 
 export const FormBrowseBlock = styled.div`
@@ -202,33 +193,22 @@ export const BrowseArea = styled.textarea`
     font-size: 14px;
     line-height: 1px;
     color: ${({ theme }) => theme.colors.textMuted};
-    letter-spacing: -0.14px;
   }
 
   &:read-only { cursor: default; }
 
-  @media screen and (max-width: 495px) {
-    max-width: 100%;
-    height: 37px;
-  }
+  @media screen and (max-width: 495px) { max-width: 100%; height: 37px; }
 `;
 
 export const CalendarBlock = styled.div`
   width: 182px;
- 
+  margin-bottom: 20px;
 
-  @media screen and (max-width: 660px) {
-    max-width: 340px;
-    width: 100%;
-  }
-
-  @media screen and (max-width: 495px) {
-    width: 100%;
-  }
+  @media screen and (max-width: 660px) { max-width: 340px; width: 100%; }
+  @media screen and (max-width: 495px) { width: 100%; }
 `;
 
 export const BtnBrowse = styled.div`
-  
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -249,7 +229,6 @@ export const BtnBrowse = styled.div`
 `;
 
 export const BtnEdit = BtnBrowse;
-
 
 export const BtnGroup = styled.div`
   display: flex;

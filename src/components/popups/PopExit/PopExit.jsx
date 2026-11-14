@@ -1,12 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import {
-  ExitWrap,
-   ExitContainer,
-    ExitBlock,
-     ExitTitle,
-      ExitGroup, 
-      BtnYes,
-       BtnNo,
+  ExitWrap, ExitContainer, ExitBlock, ExitTitle, ExitGroup, BtnYes, BtnNo,
 } from './PopExit.styled.js';
 
 export default function PopExit({ onClose }) {

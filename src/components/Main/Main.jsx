@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useMemo } from 'react';
 import Column from '../Column/Column.jsx';
 import { statuses } from '../../data.js';
@@ -18,18 +17,6 @@ export default function Main({ tasks, isLoading, onCardClick }) {
         {isLoading ? (
           <Loading>Данные загружаются...</Loading>
         ) : (
-=======
-// src/components/Main/Main.jsx
-import Column from '../Column/Column';
-import { Container } from '../../App.styled';
-import { Main as MainStyled, MainBlock, MainContent } from './Main.styled';
-
-const Main = ({ tasks, onCardView }) => {
-  return (
-    <MainStyled>
-      <MainBlock>
-        <Container>
->>>>>>> 53f5d4515d6d2ec2ae756dac788a480a72fa6bd6
           <MainContent>
             {statuses.map((status) => (
               <Column
@@ -40,14 +27,8 @@ const Main = ({ tasks, onCardView }) => {
               />
             ))}
           </MainContent>
-<<<<<<< HEAD
         )}
       </Container>
     </MainBlock>
-=======
-        </Container>
-      </MainBlock>
-    </MainStyled>
->>>>>>> 53f5d4515d6d2ec2ae756dac788a480a72fa6bd6
   );
 }
