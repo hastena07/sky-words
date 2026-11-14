@@ -1,12 +1,14 @@
-import './Main.css';
+// src/components/Main/Main.jsx
 import Column from '../Column/Column';
+import { Container } from '../../App.styled';
+import { Main as MainStyled, MainBlock, MainContent } from './Main.styled';
 
-const Main = ({ tasks, onMoveCard, onCardView }) => {
+const Main = ({ tasks, onCardView }) => {
   return (
-    <main className="Main">
-      <div className="Container">
-        <div className="Main__block">
-          <div className="Main__content">
+    <MainStyled>
+      <MainBlock>
+        <Container>
+          <MainContent>
             {tasks.map((column, index) => (
               <Column
                 key={column.title}
@@ -15,10 +17,10 @@ const Main = ({ tasks, onMoveCard, onCardView }) => {
                 onCardView={onCardView}
               />
             ))}
-          </div>
-        </div>
-      </div>
-    </main>
+          </MainContent>
+        </Container>
+      </MainBlock>
+    </MainStyled>
   );
 };
 

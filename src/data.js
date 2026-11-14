@@ -1,5 +1,4 @@
 
-
 export const initialCards = [
   {
     id: 1,

@@ -1,15 +1,12 @@
-import './Categories.css'; // Подключаем стили
-
+import { TOPIC_NAMES } from '../../theme';
+import { CategoriesBlock, Subttl, Themes, ThemeChip } from './Categories.styled';
 
 const Categories = ({ activeCategory, categories, onSelect }) => {
-     
-  
   const renderCategoryItem = (category) => (
-    <div
+    <ThemeChip
       key={category.colorClass}
-      className={`Categories__theme ${category.colorClass} ${
-        activeCategory === category.colorClass ? 'Categories__active-category' : ''
-      }`}
+      $class={category.colorClass}
+      $active={activeCategory === category.colorClass}
       onClick={() => onSelect(category.colorClass)}
       role="button"
       tabIndex={0}
@@ -17,19 +14,17 @@ const Categories = ({ activeCategory, categories, onSelect }) => {
         if (e.key === 'Enter' || e.key === ' ') onSelect(category.colorClass);
       }}
     >
-      {/* Цвет текста совпадает с цветом фона */}
-      <p className={category.colorClass}>{category.name}</p>
-    </div>
+      <p>{TOPIC_NAMES[category.colorClass] || category.name}</p>
+    </ThemeChip>
   );
 
   return (
-    <div className="Categories">
-      <p className="subttl">Категория</p>
-      <div className="Categories__themes">
-        {/* Рендерим все доступные категории из массива */}
+    <CategoriesBlock>
+      <Subttl>Категория</Subttl>
+      <Themes>
         {categories.map(renderCategoryItem)}
-      </div>
-    </div>
+      </Themes>
+    </CategoriesBlock>
   );
 };
 
