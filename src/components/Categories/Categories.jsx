@@ -1,36 +1,38 @@
-import './Categories.css'; // Подключаем стили
+import { topics } from '../../data.js';
+import {
+  CategoriesBlock, CategoriesTitle, CategoriesThemes, CategoryItem,
+} from './Categories.styled.js';
 
-
-const Categories = ({ activeCategory, categories, onSelect }) => {
-     
-  
-  const renderCategoryItem = (category) => (
-    <div
-      key={category.colorClass}
-      className={`Categories__theme ${category.colorClass} ${
-        activeCategory === category.colorClass ? 'Categories__active-category' : ''
-      }`}
-      onClick={() => onSelect(category.colorClass)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') onSelect(category.colorClass);
-      }}
-    >
-      {/* Цвет текста совпадает с цветом фона */}
-      <p className={category.colorClass}>{category.name}</p>
-    </div>
-  );
-
-  return (
-    <div className="Categories">
-      <p className="subttl">Категория</p>
-      <div className="Categories__themes">
-        {/* Рендерим все доступные категории из массива */}
-        {categories.map(renderCategoryItem)}
-      </div>
-    </div>
-  );
+const topicKey = {
+  'Web Design': 'orange',
+  Research: 'green',
+  Copywriting: 'purple',
 };
 
-export default Categories;
+export default function Categories({
+  selected,
+  onSelect,
+  readOnly = false,
+  variant = 'default', // 'default' | 'top' | 'down'
+}) {
+  const items = readOnly && selected ? [selected] : topics;
+
+  return (
+    <CategoriesBlock $variant={variant}>
+      <CategoriesTitle>Категория</CategoriesTitle>
+      <CategoriesThemes>
+        {items.map((topic) => (
+          <CategoryItem
+            key={topic}
+            $type={topicKey[topic]}
+            $active={selected === topic}
+            $readOnly={readOnly}
+            onClick={() => !readOnly && onSelect?.(topic)}
+          >
+            {topic}
+          </CategoryItem>
+        ))}
+      </CategoriesThemes>
+    </CategoriesBlock>
+  );
+}

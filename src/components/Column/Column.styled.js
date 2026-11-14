@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { colors } from '../../theme';
 
 export const ColumnBlock = styled.div`
   width: 20%;
@@ -11,17 +10,20 @@ export const ColumnBlock = styled.div`
   }
 `;
 
-export const ColumnTitle = styled.p`
-  color: ${colors.textGray};
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
-  text-transform: uppercase;
+export const ColumnTitle = styled.div`
   padding: 0 10px;
   margin: 15px 0;
+
+  p {
+    color: ${({ theme }) => theme.colors.textMuted};
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+  }
 `;
 
-export const CardsWrap = styled.div`
+export const Cards = styled.div`
   width: 100%;
   display: block;
   position: relative;
@@ -30,9 +32,4 @@ export const CardsWrap = styled.div`
     display: flex;
     overflow-y: auto;
   }
-`;
-
-export const Empty = styled.div`
-  padding: 0 10px;
-  color: ${colors.textGray};
 `;

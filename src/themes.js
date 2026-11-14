@@ -1,0 +1,46 @@
+export const lightTheme = {
+  colors: {
+    bgWrapper: '#F1F1F1',
+    bgMain: '#EAEEF6',
+    bgCard: '#FFFFFF',
+    bgPopup: '#FFFFFF',
+    bgInput: '#EAEEF6',
+    bgInputTransparent: 'transparent',
+    textMain: '#000000',
+    textMuted: '#94A6BE',
+    primary: '#565EEF',
+    primaryHover: '#33399b',
+    border: '#D4DBE5',
+    borderLight: 'rgba(148, 166, 190, 0.4)',
+    overlay: 'rgba(0, 0, 0, 0.4)',
+    white: '#FFFFFF',
+    black: '#000000',
+    orange: { bg: '#FFE4C2', text: '#FF6D00' },
+    green:  { bg: '#B4FDD1', text: '#06B16E' },
+    purple: { bg: '#E9D4FF', text: '#9A48F1' },
+    gray:   { bg: '#94A6BE', text: '#FFFFFF' },
+    shadow: '0px 10px 39px 0px rgba(26, 56, 101, 0.21)',
+  },
+  fonts: {
+    main: '"Roboto", Arial, Helvetica, sans-serif',
+  },
+};
+
+export const darkTheme = {
+  ...lightTheme,
+  colors: {
+    ...lightTheme.colors,
+    bgWrapper: '#151419',
+    bgMain: '#151419',
+    bgCard: '#20202C',
+    bgPopup: '#20202C',
+    bgInput: '#151419',
+    textMain: '#FFFFFF',
+    border: '#4E5566',
+    overlay: 'rgba(0, 0, 0, 0.8)',
+    shadow: '0px 10px 39px 0px rgba(148, 166, 190, 0.40)',
+    orange: { bg: '#FF6D00', text: '#FFE4C2' },
+    green:  { bg: '#06B16E', text: '#B4FDD1' },
+    purple: { bg: '#9A48F1', text: '#E9D4FF' },
+  },
+};

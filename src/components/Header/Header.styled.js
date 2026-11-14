@@ -1,75 +1,48 @@
 import styled from 'styled-components';
-import { colors } from '../../theme';
 
-export const Header = styled.header`
+export const HeaderBlock = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: ${colors.white};
+  background-color: ${({ theme }) => theme.colors.bgCard};
 `;
 
-export const HeaderBlock = styled.div`
+export const HeaderBlockInner = styled.div`
   height: 70px;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  top: 0;
-  left: 0;
-  padding: 0 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0 10px;
 `;
 
-export const HeaderNav = styled.div`
+export const HeaderLogo = styled.div`
+  img { width: 85px; }
+`;
+
+export const HeaderNav = styled.nav`
+  position: relative;
   max-width: 290px;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export const LogoLight = styled.div`
-  display: flex;
-  align-items: center;
-
-  .Theme-dark & { display: none; }
-
-  img {
-    width: 85px;
-    height: 32px;
-    margin-right: 8px;
-    object-fit: contain;
-  }
-`;
-
-export const LogoDark = styled.div`
-  display: none;
-  align-items: center;
-
-  .Theme-dark & { display: flex; }
-
-  img {
-    width: 85px;
-    height: 32px;
-    margin-right: 8px;
-    object-fit: contain;
-  }
-`;
-
 export const BtnMainNew = styled.button`
   width: 178px;
-  height: 30px;
-  border-radius: 4px;
-  background-color: ${colors.primary};
-  color: ${colors.white};
-  border: none;
-  font-size: 14px;
-  line-height: 1;
-  font-weight: 500;
-  margin-right: 20px;
-
-  &:hover {
-    background-color: ${colors.primaryHover};
-  }
+    height: 30px;
+    border-radius: 4px;
+    background-color: #565EEF;
+    color: #FFFFFF;
+    border: none;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    margin-right: 20px;
+  transition: background-color 0.2s;
+  &:hover { background-color: ${({ theme }) => theme.colors.primaryHover}; }
 
   @media screen and (max-width: 495px) {
     z-index: 3;
@@ -83,45 +56,27 @@ export const BtnMainNew = styled.button`
   }
 `;
 
-export const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+export const HeaderUser = styled.button`
+  height: 20px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
-`;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${({ theme }) => theme.colors.primary};
 
-export const ModalContent = styled.div`
-  width: 340px;
-  border-radius: 10px;
-  background: ${colors.white};
-  padding: 40px 30px;
-  text-align: center;
-
-  h3 {
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-weight: 600;
+  &::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    border-left: 1.9px solid ${({ theme }) => theme.colors.primary};
+    border-bottom: 1.9px solid ${({ theme }) => theme.colors.primary};
+    transform: rotate(-45deg);
+    margin: -6px 0 0 5px;
   }
-
-  p {
-    color: ${colors.textGray};
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-`;
-
-export const ModalActions = styled.div`
-  display: flex;
-  gap: 10px;
-
-  button {
-    flex: 1;
-    height: 40px;
-  }
+  &:hover { color: ${({ theme }) => theme.colors.primaryHover}; }
 `;

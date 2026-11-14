@@ -1,32 +1,17 @@
-import Card from '../Card/Card';
-import { CardItem } from '../Card/Card.styled';
-import { ColumnBlock, ColumnTitle, CardsWrap, Empty } from './Column.styled';
+import Card from '../Card/Card.jsx';
+import { ColumnBlock, ColumnTitle, Cards } from './Column.styled.js';
 
-const Column = ({ title, cards, onCardView }) => {
+export default function Column({ title, tasks, onCardClick }) {
   return (
     <ColumnBlock>
-      <div>
-        <ColumnTitle>{title}</ColumnTitle>
-      </div>
-
-      <CardsWrap>
-        {cards.length === 0 ? (
-          <Empty>Нет задач</Empty>
-        ) : (
-          cards.map((cardData) => (
-            <CardItem key={cardData.id}>
-              <Card
-                title={cardData.title}
-                category={cardData.topic}
-                date={cardData.date}
-                onView={() => onCardView(cardData)}
-              />
-            </CardItem>
-          ))
-        )}
-      </CardsWrap>
+      <ColumnTitle>
+        <p>{title}</p>
+      </ColumnTitle>
+      <Cards>
+        {tasks.map((task) => (
+          <Card key={task.id} task={task} onClick={onCardClick} />
+        ))}
+      </Cards>
     </ColumnBlock>
   );
-};
-
-export default Column;
+}

@@ -1,27 +1,34 @@
-// src/components/Main/Main.jsx
-import Column from '../Column/Column';
-import { Container } from '../../App.styled';
-import { MainBlock as MainStyled, MainInner, MainContent } from './Main.styled';
+import { useMemo } from 'react';
+import Column from '../Column/Column.jsx';
+import { statuses } from '../../data.js';
+import { MainBlock, MainContent, Loading } from './Main.styled.js';
+import { Container } from '../../App.styled.js';
 
-const Main = ({ tasks, onMoveCard, onCardView }) => {
+export default function Main({ tasks, isLoading, onCardClick }) {
+  const grouped = useMemo(() => {
+    const map = Object.fromEntries(statuses.map((s) => [s, []]));
+    tasks.forEach((t) => map[t.status]?.push(t));
+    return map;
+  }, [tasks]);
+
   return (
-    <MainStyled>
+    <MainBlock>
       <Container>
-        <MainInner>
+        {isLoading ? (
+          <Loading>Данные загружаются...</Loading>
+        ) : (
           <MainContent>
-            {tasks.map((column, index) => (
+            {statuses.map((status) => (
               <Column
-                key={column.title}
-                title={column.title}
-                cards={column.cards}
-                onCardView={onCardView}
+                key={status}
+                title={status}
+                tasks={grouped[status]}
+                onCardClick={onCardClick}
               />
             ))}
           </MainContent>
-        </MainInner>
+        )}
       </Container>
-    </MainStyled>
+    </MainBlock>
   );
-};
-
-export default Main;
+}

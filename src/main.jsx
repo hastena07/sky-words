@@ -1,16 +1,37 @@
-import { StrictMode } from 'react';
+import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { GlobalStyle } from './App.styled';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 import App from './App.jsx';
-import './styles/temp-popups.css';
+import SignIn from './components/SignIn/SignIn.jsx';
+import SignUp from './components/SignUp/SignUp.jsx';
+import { GlobalStyle } from './App.styled.js';
+import { lightTheme, darkTheme } from './themes.js';
+import './index.css';
 
+function Root() {
+  const [isDark, setIsDark] = useState(false);
+  const theme = isDark ? darkTheme : lightTheme;
 
-const container = document.getElementById('root');
-if (!container) throw new Error('Missing #root element.');
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<App isDark={isDark} onThemeToggle={setIsDark} />}
+          />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
+}
 
-createRoot(container).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <GlobalStyle />
-    <App />
-  </StrictMode>
+    <Root />
+  </StrictMode>,
 );
