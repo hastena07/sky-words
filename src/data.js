@@ -1,39 +1,82 @@
 
-export const initialCards = [
+
+export const tasks = [
   {
     id: 1,
-    topic: 'Research',
-    title: 'Изучить документацию по API',
-    date: '30.10.23',
-    status: 'Нужно сделать',
+    topic: 'Web Design',
+    title: 'Название задачи',
+    date: '30.10.23', 
+    status: 'Без статуса' 
   },
   {
     id: 2,
+    topic: 'Research', 
+    title: 'Название задачи',
+    date: '30.10.23',
+    status: 'Без статуса' 
+  },
+  { 
+    id: 3, 
     topic: 'Web Design',
-    title: 'Нарисовать макет главной страницы',
-    date: '02.11.23',
-    status: 'В работе',
+    title: 'Название задачи', 
+    date: '30.10.23', 
+    status: 'Без статуса' 
   },
-  {
-    id: 3,
-    topic: 'Development',
-    title: ' Стилизовать интерфейс с помощью Styled Components',
-    date: '05.11.23',
-    status: 'Тестирование',
-  },
-  {
+  { 
     id: 4,
-    topic: 'Research',
-    title: 'Подобрать библиотеку для графиков',
-    date: '01.11.23',
-    status: 'Готово',
-  },
+    topic: 'Copywriting',
+    title: 'Название задачи',
+    date: '30.10.23', status: 'Без статуса' 
+    },
   {
     id: 5,
+    topic: 'Web Design', 
+    title: 'Название задачи',
+    date: '30.10.23', status: 'Без статуса' 
+    },
+  { 
+    id: 6,
+    topic: 'Research',  
+    title: 'Название задачи',
+    date: '30.10.23', status: 'Нужно сделать'
+    },
+  { 
+    id: 7,
+    topic: 'Research',  
+    title: 'Название задачи',
+    date: '30.10.23', status: 'В работе'
+    },
+  { 
+    id: 8,
     topic: 'Copywriting',
-    title: 'Написать текст для рассылки',
-    date: '03.11.23',
-    status: 'Нужно сделать',
-  },
+    title: 'Название задачи',
+    date: '30.10.23', status: 'В работе'
+    },
+  { 
+    id: 9,
+    topic: 'Web Design', 
+    title: 'Название задачи',
+    date: '30.10.23', status: 'В работе' 
+    },
+  {
+    id: 10,
+    topic: 'Research', 
+    title: 'Название задачи',
+    date: '30.10.23', status: 'Тестирование'
+     },
+  { 
+    id: 11,
+    topic: 'Research', 
+    title: 'Название задачи',
+    date: '30.10.23', status: 'Готово' 
+    },
 ];
 
+export const statuses = [
+  'Без статуса', 
+  'Нужно сделать', 
+  'В работе', 
+  'Тестирование', 
+  'Готово'
+];
+export const topics = ['Web Design', 'Research', 'Copywriting'];

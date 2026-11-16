@@ -1,31 +1,38 @@
-import { TOPIC_NAMES } from '../../theme';
-import { CategoriesBlock, Subttl, Themes, ThemeChip } from './Categories.styled';
+import { topics } from '../../data.js';
+import {
+  CategoriesBlock, CategoriesTitle, CategoriesThemes, CategoryItem,
+} from './Categories.styled.js';
 
-const Categories = ({ activeCategory, categories, onSelect }) => {
-  const renderCategoryItem = (category) => (
-    <ThemeChip
-      key={category.colorClass}
-      $class={category.colorClass}
-      $active={activeCategory === category.colorClass}
-      onClick={() => onSelect(category.colorClass)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') onSelect(category.colorClass);
-      }}
-    >
-      <p>{TOPIC_NAMES[category.colorClass] || category.name}</p>
-    </ThemeChip>
-  );
-
-  return (
-    <CategoriesBlock>
-      <Subttl>Категория</Subttl>
-      <Themes>
-        {categories.map(renderCategoryItem)}
-      </Themes>
-    </CategoriesBlock>
-  );
+const topicKey = {
+  'Web Design': 'orange',
+  Research: 'green',
+  Copywriting: 'purple',
 };
 
-export default Categories;
+export default function Categories({
+  selected,
+  onSelect,
+  readOnly = false,
+  variant = 'default',
+}) {
+  const items = readOnly && selected ? [selected] : topics;
+
+  return (
+    <CategoriesBlock $variant={variant}>
+      {!readOnly && <CategoriesTitle>Категория</CategoriesTitle>}
+      <CategoriesThemes>
+        {items.map((topic) => (
+          <CategoryItem
+            key={topic}
+            $type={topicKey[topic]}
+            $active={selected === topic}
+            $readOnly={readOnly}
+            onClick={() => !readOnly && onSelect?.(topic)}
+          >
+            {topic}
+          </CategoryItem>
+        ))}
+      </CategoriesThemes>
+    </CategoriesBlock>
+  );
+}

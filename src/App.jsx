@@ -1,122 +1,70 @@
-// src/App.jsx
-import { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { themes } from './theme';
-import { GlobalStyle } from './styles/GlobalStyle';
-import { Wrapper } from './App.styled';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import ModalManager from './components/ModalManager/ModalManager';
-import SignIn from './components/Auth/SignIn';
-import SignUp from './components/Auth/SignUp';
+import { useEffect, useState } from 'react';
+import Header from './components/Header/Header.jsx';
+import Main from './components/Main/Main.jsx';
+import PopNewCard from './components/popups/PopNewCard/PopNewCard.jsx';
+import PopBrowse from './components/popups/PopBrowse/PopBrowse.jsx';
+import PopExit from './components/popups/PopExit/PopExit.jsx';
+import { tasks as initialTasks } from './data.js';
+import { Wrapper } from './App.styled.js';
 
-const INITIAL_TASKS = [
-  {
-    title: 'Без статуса',
-    cards: [
-      { id: 1, topic: '_orange', title: 'Название задачи', date: '30.10.25' },
-      { id: 2, topic: '_purple', title: 'Собрать отзывы по макету', date: '31.10.25' },
-    ],
-  },
-  {
-    title: 'Нужно сделать',
-    cards: [
-      { id: 3, topic: '_green', title: ' Стилизовать интерфейс с помощью Styled Components', date: '01.11.25' },
-    ],
-  },
-  { title: 'В работе',
-     cards: [
-       { id: 3, topic: '_green', title: 'Исследовать конкурентов', date: '01.11.25' },
-      ] 
-    },
-  { title: 'Тестирование',
-     cards: [{
-       id: 4, topic: '_orange', title: 'Подобрать библиотеку для графиков', date: '30.10.25' },
-      { id: 2, topic: '_purple', title: 'Собрать отзывы по макету', date: '31.10.25' },
-    ] },
-  { title: 'Готово', cards: [
-    { id: 5, topic: '_purple', title: 'Написать текст для рассылки', date: '31.10.25' },
-  ] },
-];
+export default function App({ isDark, onThemeToggle }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [popNewOpen, setPopNewOpen] = useState(false);
+  const [popBrowseOpen, setPopBrowseOpen] = useState(false);
+  const [popExitOpen, setPopExitOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
-  const App = () => {
-  const [isDark, setIsDark] = useState(false);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [authMode, setAuthMode] = useState('signin');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState(null);
-  const [currentCard, setCurrentCard] = useState(null);
-  const [tasks, setTasks] = useState(INITIAL_TASKS);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setData(initialTasks);
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const theme = isDark ? themes.dark : themes.light;
-
-  const openModal = (type) => {
-    setModalType(type);
-    setIsModalOpen(true);
-  };
-  const closeModal = () => setIsModalOpen(false);
-
-  const openCard = (card) => {
-    setCurrentCard(card);
-    openModal('browse');
+  const handleCardClick = (task) => {
+    setSelectedTask(task);
+    setPopBrowseOpen(true);
   };
 
-  const createCard = ({ title, category, date }) => {
-    const formattedDate = date
-      ? new Date(date).toLocaleDateString('ru-RU')
-      : '—';
-    const newCard = { id: Date.now(), topic: category, title, date: formattedDate };
-    setTasks((prev) =>
-      prev.map((column, index) =>
-        index === 0 ? { ...column, cards: [newCard, ...column.cards] } : column
-      )
-    );
+  const handleCreate = (task) => {
+    setData((prev) => [...prev, { ...task, id: Date.now() }]);
+    setPopNewOpen(false);
   };
 
-  const handleLogout = () => {
-    closeModal();
-    setAuthMode('signin');
-    setIsAuthOpen(true);
+  const handleSave = (updated) => {
+    setData((prev) => prev.map((t) => (t.id === updated.id ? updated : t)));
+    setSelectedTask(updated);
   };
 
-  if (isAuthOpen) {
-    return (
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        {authMode === 'signup' ? (
-          <SignUp onSwitchMode={() => setAuthMode('signin')} onEnter={() => setIsAuthOpen(false)} />
-        ) : (
-          <SignIn onSwitchMode={() => setAuthMode('signup')} onEnter={() => setIsAuthOpen(false)} />
-        )}
-      </ThemeProvider>
-    );
-  }
+  const handleDelete = (id) => {
+    setData((prev) => prev.filter((t) => t.id !== id));
+    setPopBrowseOpen(false);
+    setSelectedTask(null);
+  };
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Wrapper>
-        <Header
-          userName="Ivan Ivanov"
-          userEmail="user@test.ru"
-          onUserClick={() => openModal('exit')}
-          onNewCard={() => openModal('new-card')}
-          isDark={isDark}
-          onToggleTheme={() => setIsDark(!isDark)}
-        />
-        <Main tasks={tasks} onCardView={openCard} />
-      </Wrapper>
-
-      <ModalManager
-        isOpen={isModalOpen}
-        modalType={modalType}
-        onClose={closeModal}
-        onConfirmExit={handleLogout}
-        onCreate={createCard}
-        currentCard={currentCard}
+    <Wrapper>
+      <Header
+        onNewCard={() => setPopNewOpen(true)}
+        onExit={() => setPopExitOpen(true)}
+        isDark={isDark}
+        onThemeToggle={onThemeToggle}
       />
-    </ThemeProvider>
+      <Main tasks={data} isLoading={isLoading} onCardClick={handleCardClick} />
+      {popNewOpen && (
+        <PopNewCard onClose={() => setPopNewOpen(false)} onCreate={handleCreate} />
+      )}
+      {popBrowseOpen && selectedTask && (
+        <PopBrowse
+          task={selectedTask}
+          onClose={() => { setPopBrowseOpen(false); setSelectedTask(null); }}
+          onSave={handleSave}
+          onDelete={handleDelete}
+        />
+      )}
+      {popExitOpen && <PopExit onClose={() => setPopExitOpen(false)} />}
+    </Wrapper>
   );
-};
-
-export default App;
+}

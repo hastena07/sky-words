@@ -1,37 +1,45 @@
-import PopUser from '../PopUser/PopUser';
-import logo from '../assets/logo.png';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import PopUser from '../popups/PopUser/PopUser.jsx';
 import {
-  Header as HeaderStyled,
-  HeaderBlock, Logos, LogoLight, LogoDark, HeaderNav, BtnMainNew,
-} from './Header.styled';
+  HeaderBlock, HeaderBlockInner, HeaderLogo, HeaderNav,
+  BtnMainNew, HeaderUser,
+} from './Header.styled.js';
+import { Container } from '../../App.styled.js';
 
-const Header = ({
-  userName, userEmail, onUserClick, onNewCard, isDark, onToggleTheme,
-}) => {
+export default function Header({ onNewCard, onExit, isDark, onThemeToggle }) {
+  const [userOpen, setUserOpen] = useState(false);
+
   return (
-    <HeaderStyled>
-      <HeaderBlock>
-        <Logos>
-          <LogoLight href="/"><img src={logo} alt="Логотип" /></LogoLight>
-          <LogoDark href="/"><img src={logo} alt="Логотип" /></LogoDark>
-        </Logos>
-
-        <HeaderNav>
-          <BtnMainNew type="button" id="btnMainNew" onClick={() => onNewCard()}>
-            Создать новую задачу
-          </BtnMainNew>
-
-          <PopUser
-            userName={userName}
-            userEmail={userEmail}
-            onUserClick={onUserClick}
-            isDark={isDark}
-            onToggleTheme={onToggleTheme}
-          />
-        </HeaderNav>
-      </HeaderBlock>
-    </HeaderStyled>
+    <HeaderBlock>
+      <Container>
+        <HeaderBlockInner>
+          <HeaderLogo>
+            <Link to="/">
+              <img src="/images/logo.png" alt="Skypro Kanban" />
+            </Link>
+          </HeaderLogo>
+          <HeaderNav>
+            <BtnMainNew type="button" onClick={onNewCard}>
+              Создать новую задачу
+            </BtnMainNew>
+            <HeaderUser
+              type="button"
+              aria-expanded={userOpen}
+              onClick={() => setUserOpen((p) => !p)}
+            >
+              Ivan Ivanov
+            </HeaderUser>
+            {userOpen && (
+              <PopUser
+                isDark={isDark}
+                onThemeToggle={onThemeToggle}
+                onExit={() => { setUserOpen(false); onExit(); }}
+              />
+            )}
+          </HeaderNav>
+        </HeaderBlockInner>
+      </Container>
+    </HeaderBlock>
   );
-};
-
-export default Header;
+}

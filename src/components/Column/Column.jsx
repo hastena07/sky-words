@@ -1,19 +1,17 @@
-import Card from '../Card/Card';
-import { ColumnBlock, Title, Cards } from './Column.styled';
+import Card from '../Card/Card.jsx';
+import { ColumnBlock, ColumnTitle, Cards } from './Column.styled.js';
 
-const Column = ({ title, cards, onCardView }) => {
+export default function Column({ title, tasks, onCardClick }) {
   return (
     <ColumnBlock>
-      <Title>
+      <ColumnTitle>
         <p>{title}</p>
-      </Title>
+      </ColumnTitle>
       <Cards>
-        {cards.map((card) => (
-          <Card key={card.id} card={card} onCardClick={() => onCardView(card)} />
+        {tasks.map((task) => (
+          <Card key={task.id} task={task} onClick={onCardClick} />
         ))}
       </Cards>
     </ColumnBlock>
   );
-};
-
-export default Column;
+}
