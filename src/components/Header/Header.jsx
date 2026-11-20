@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import PopUser from '../popups/PopUser/PopUser.jsx';
+import PopUser from '../popups/PopUser.jsx';
 import {
   HeaderBlock, HeaderBlockInner, HeaderLogo, HeaderNav,
   BtnMainNew, HeaderUser,
