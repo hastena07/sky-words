@@ -44,7 +44,7 @@ export const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.colors.bgWrapper};
+  background-color: rgba(234, 238, 246, 1);
 `;
 
 export const Container = styled.div`

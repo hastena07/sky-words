@@ -1,10 +1,8 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import App from './App.jsx';
-import SignIn from './components/SignIn/SignIn.jsx';
-import SignUp from './components/SignUp/SignUp.jsx';
 import { GlobalStyle } from './App.styled.js';
 import { lightTheme, darkTheme } from './themes.js';
 import './index.css';
@@ -13,10 +11,23 @@ function Root() {
   const [isDark, setIsDark] = useState(
     () => localStorage.getItem('theme') === 'dark'
   );
+  const [isAuth, setIsAuth] = useState(
+    () => localStorage.getItem('isAuth') === 'true'
+  );
 
   const handleThemeToggle = (next) => {
     setIsDark(next);
     localStorage.setItem('theme', next ? 'dark' : 'light');
+  };
+
+  const login = () => {
+    setIsAuth(true);
+    localStorage.setItem('isAuth', 'true');
+  };
+
+  const logout = () => {
+    setIsAuth(false);
+    localStorage.setItem('isAuth', 'false');
   };
 
   const theme = isDark ? darkTheme : lightTheme;
@@ -25,14 +36,13 @@ function Root() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<App isDark={isDark} onThemeToggle={handleThemeToggle} />}
-          />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
+        <App
+          isAuth={isAuth}
+          login={login}
+          logout={logout}
+          isDark={isDark}
+          onThemeToggle={handleThemeToggle}
+        />
       </BrowserRouter>
     </ThemeProvider>
   );

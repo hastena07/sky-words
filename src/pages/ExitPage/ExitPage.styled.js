@@ -1,23 +1,16 @@
 import styled from 'styled-components';
 
-export const ExitWrap = styled.div`
+export const ExitPageWrapper = styled.div`
   position: fixed;
   inset: 0;
-  z-index: 5;
+  background: ${({ theme }) => theme.colors.overlay};
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: ${({ theme }) => theme.colors.overlay};
 `;
 
-export const ExitContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
-export const ExitBlock = styled.div`
+export const ExitPageBlock = styled.div`
   background: ${({ theme }) => theme.colors.bgPopup};
   width: 100%;
   max-width: 370px;
@@ -28,7 +21,7 @@ export const ExitBlock = styled.div`
   @media screen and (max-width: 375px) { padding: 50px 20px; }
 `;
 
-export const ExitTitle = styled.h2`
+export const ExitPageTitle = styled.h2`
   text-align: center;
   font-size: 20px;
   font-weight: 700;
@@ -36,7 +29,7 @@ export const ExitTitle = styled.h2`
   color: ${({ theme }) => theme.colors.textMain};
 `;
 
-export const ExitGroup = styled.div`
+export const ExitPageGroup = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -44,7 +37,7 @@ export const ExitGroup = styled.div`
   @media screen and (max-width: 375px) { display: block; }
 `;
 
-export const BtnYes = styled.button`
+export const ExitPageYes = styled.button`
   flex: 1;
   height: 30px;
   border-radius: 4px;
@@ -63,7 +56,7 @@ export const BtnYes = styled.button`
   }
 `;
 
-export const BtnNo = styled.button`
+export const ExitPageNo = styled.button`
   flex: 1;
   height: 30px;
   border-radius: 4px;
